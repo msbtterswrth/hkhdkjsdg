@@ -199,58 +199,6 @@
       }
     }
 
-    .utility {
-
-      @include utilities.breakpoint(sm-max) {
-        margin: utilities.$space-xl 0;
-      }
-
-      ul {
-        margin: 0;
-        padding: 0;
-        text-align: right;
-
-        @include utilities.breakpoint(sm-max) {
-          text-align: left;
-        }
-
-        li {
-          display: inline-block;
-          line-height: 1em;
-          margin: 0 0 0 utilities.$space-xs;
-
-          + li {
-            border-left: 1px solid utilities.$secondary;
-            margin-left: utilities.$space-md;
-            padding-left: utilities.$space-md;
-          }
-
-          @include utilities.breakpoint(sm-max) {
-            display: block;
-            margin: 0;
-
-            + li {
-              border: none;
-              margin-top: 15px;
-              margin-left: 0;
-              padding-left: 0;
-            }
-          }
-
-          a {
-            color: #fff;
-            font-size: utilities.$font-xxs;
-
-            @include utilities.breakpoint(md) {
-              font-size: utilities.$font-xxs;
-              color: #fff;
-            }
-
-          }
-        }
-      }
-    }
-
     .nav {
       display: flex;
       flex-wrap: wrap;
@@ -287,202 +235,56 @@
     }
 
     .menu {
-      @include utilities.breakpoint(md-min) {
-        display: flex;
-        justify-content: end;
-        order: 2;
-        text-align: right;
-      }
+      align-items:center;
+      display: flex;
+      gap: utilities.$space-sm;
+      justify-content: end;
+      list-style-type: none;
+      margin: 0;
+      order: 2;
+      padding: 0;
+      text-align: right;
 
       @include utilities.breakpoint(sm-max) {
+        display:block;
         margin: utilities.$space-xl 0;
+        text-align: left;
       }
-
-      .search-toggle {
+      li {
+        margin:0;
         @include utilities.breakpoint(sm-max) {
-          display: none;
-        }
-      }
-
-      ul:not(.contextual-links) {
-        margin: 0;
-        padding: 0;
-
-        @include utilities.breakpoint(sm-max) {
-          list-style-type: none;
-          text-align: left;
+          border-bottom: 1px solid utilities.$secondary;
+          display: block;
+          padding-bottom: utilities.$space-md;
+          margin: 0 0 utilities.$space-md 0;
         }
 
-        li {
-          &.level-1 {
-            display: inline-block;
-            margin: 0 0 0 15px;
+        a {
+          &.btn {
+            margin:0 0 0 utilities.$space-lg;
+          }
+          &:not(.btn) {
+            color: #fff;
+            font-family: utilities.$font-display;
+            font-size: utilities.$font-sm;
+            font-weight: 600;
+            position: relative;
+            text-decoration: none;
+            @include utilities.underline(utilities.$secondary);
 
             @include utilities.breakpoint(sm-max) {
-              border-bottom: 1px solid utilities.$secondary;
-              display: block;
-              padding-bottom: utilities.$space-md;
-              margin: 0 0 utilities.$space-md 0;
-            }
-
-            &.parent {
-              margin-bottom: -20px;
-              padding-bottom: 20px;
-              position: relative;
-
-              @include utilities.breakpoint(md) {
-                padding-right: utilities.$space-md;
-              }
-
-              @include utilities.breakpoint(sm-max) {
-                margin-bottom: utilities.$space-md;
-                padding-bottom: utilities.$space-md;
-                padding-right: utilities.$space-md;
-              }
-
-              &::after {
-                content: "\e90d";
-                display: inline-block;
-                font-family: icomoon;
-                font-size: utilities.$font-sm;
-                margin-left: 2px;
-                vertical-align: -4px;
-
-                @include utilities.breakpoint(md) {
-                  font-size: 1em;
-                  position: absolute;
-                  right: 0;
-                  top: 0;
-                }
-
-                @include utilities.breakpoint(sm-max) {
-                  position: absolute;
-                  right: 0;
-                  top: 0;
-                }
-              }
-
-              &.open {
-                &::after {
-                  content: "\e90c";
-                }
-
-                > ul {
-                  opacity: 1;
-                  visibility: visible;
-                  z-index: 3;
-
-                  @include utilities.breakpoint(sm-max) {
-                    height: auto;
-                    margin-top: utilities.$space-sm;
-                    padding: 0;
-                    position: relative;
-                  }
-                }
-
-                a {
-                  background: none;
-                }
-              }
-
-              &:hover {
-                @include utilities.breakpoint(md-min) {
-                  &::after {
-                    content: "\e90c";
-                  }
-
-                  > ul {
-                    opacity: 1;
-                    visibility: visible;
-                    z-index: 3;
-
-                    @include utilities.breakpoint(sm-max) {
-                      height: auto;
-                      margin-top: utilities.$space-sm;
-                      padding: 0;
-                      position: relative;
-                    }
-                  }
-
-                  a {
-                    background: none;
-                  }
-                }
-              }
-
-              > ul {
-                background: #fff;
-                box-shadow: 0 0 10px 3px rgba(0, 0, 0, .1);
-                left: 0;
-                margin: 0;
-                opacity: 0;
-                padding: utilities.$space-md;
-                position: absolute;
-                text-align: left;
-                top: 100%;
-                visibility: hidden;
-                z-index: -1;
-                transition: opacity .3s linear .1s;
-
-                @include utilities.breakpoint(lg) {
-                  width: 275px;
-                }
-
-                @include utilities.breakpoint(sm-max) {
-                  background: none;
-                  height: 0;
-                  padding: 0;
-                  position: relative;
-                }
-
-                li {
-
-                  a {
-                    color: utilities.$primary;
-                    font-weight: 400;
-                    letter-spacing: 0;
-                    text-transform: none;
-
-                    @include utilities.breakpoint(sm-max) {
-                      color: #fff;
-                      font-size: utilities.$font-xxs;
-                    }
-                  }
-                }
-              }
-            }
-          }
-
-          a {
-
-            &:not(.btn) {
               color: #fff;
-              font-family: utilities.$font-display;
-              font-size: utilities.$font-sm;
-              font-weight: 600;
-              position: relative;
+              font-size: utilities.$font-xs;
               text-decoration: none;
-              @include utilities.underline(utilities.$secondary);
+            }
 
-              @include utilities.breakpoint(md) {
-                font-size: utilities.$font-xxs;
-              }
+            &:focus,
+            &.is-active {
+              color: utilities.$secondary;
+            }
 
-              @include utilities.breakpoint(sm-max) {
-                color: #fff;
-                font-size: utilities.$font-xs;
-                text-decoration: none;
-              }
-
-              &:focus,
-              &.is-active {
-                color: utilities.$secondary;
-              }
-
-              &::after {
-                display: none
-              }
-
+            &::after {
+              display: none
             }
           }
         }

@@ -89,7 +89,7 @@
 //BUTTONS & LINKS
 @mixin button($background, $bghover, $text, $outline: false, $large: false) {
   background: $background;
-  border-radius: variables.$border-radius-lg;
+  border-radius: variables.$border-radius;
   border: 2px solid $background;
   box-shadow: none;
   color: $text;
