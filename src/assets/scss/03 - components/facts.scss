@@ -1,21 +1,29 @@
 @use "sass:color";
-@use '../utilities' as utilities; 
+@use '../utilities' as utilities;
 
 .facts {
     display: grid;
     grid: auto / 40% 1fr;
     gap: utilities.$space-md;
+
+    @include utilities.breakpoint(xs) {
+        grid: auto / 1fr;
+    }
+
     .fact-card {
         border: 1px solid utilities.$tan-lt;
+        border-top: 4px solid utilities.$gold;
         border-radius: utilities.$border-radius;
         padding: utilities.$space-md;
-        text-align:center; 
+        text-align: center;
+
         .stat {
             display: block;
             font-size: utilities.$font-hero;
             font-weight: 800;
             margin-bottom: utilities.$space-md;
         }
+
         .title {
             font-size: utilities.$font-xs;
         }

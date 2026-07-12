@@ -5,9 +5,6 @@ $gray: #737373;
 $gray-md: #6f6f6f;
 $gray-dk: #3e3d3c;
 $gray-xdk: #1F1F1F;
-$tan-lt: #eeeadf;
-$tan: #e3dcc9 ;
-$tan-dk: #b6b0a1;
 $red-lt: #e0938d;
 $red: #cc4b42;
 $red-dk: #8e342e;
@@ -35,10 +32,53 @@ $pink-lt: #ff92a4;
 $pink: #ff647d;
 $pink-dk: #cc5064;
 
-$primary: $blue;
-$primary-lt: $blue-lt;
-$primary-dk: $blue-dk;
-$primary-xdk: $blue-xdk;
+
+$navy-50: #e9eef2;
+$navy-100: #d2dce5;
+$navy-200: #a5b9cb;
+$navy-300: #7997b1;
+$navy-400: #4c7497;
+$navy-500: #1f517d;
+$navy-600: #194164;
+$navy-700: #13314B;
+$navy-800: #0C2032;
+$navy-900: #061019;
+$navy-lt: $navy-100;
+$navy: $navy-500;
+$navy-dk: $navy-700;
+
+$sage-50: #e0f2ed;
+$sage-100: #b3dfd2;
+$sage-200: #83cab6;
+$sage-300: #53b599;
+$sage-400: #08a588;
+$sage-500: #199573;
+$sage-600: #158867;
+$sage-700: #107859;
+$sage-800: #08684b;
+$sage-900: #004c31;
+$sage-lt: #e0f2ed;
+$sage: #08a588;
+$sage-dk: #004c31;
+
+$tan-50: #fcfcfa;
+$tan-100: #f9f8f4;
+$tan-200: #f4f1e9;
+$tan-300: #eeeadf;
+$tan-400: #e9e3d4;
+$tan-500: #e3dcc9;
+$tan-600: #B6B0A1;
+$tan-700: #888479;
+$tan-800: #5b5850;
+$tan-900: #2d2c28;
+$tan-lt: $tan-200;
+$tan: $tan-500 ;
+$tan-dk: $tan-700;
+
+$primary: $navy;
+$primary-lt: $navy-lt;
+$primary-dk: $navy-dk;
+$primary-xdk: $navy-800;
 $secondary: $gold;
 $secondary-lt: $gold-lt;
 $secondary-dk: $gold-dk;
@@ -47,9 +87,9 @@ $tertiary-lt: $tan-lt;
 $tertiary-dk: $tan-dk;
 
 /*FONTS*/
-$font-script: 'Roboto', sans-serif;
+$font-script: "Merriweather", serif;
 $font-display: 'Roboto Condensed', sans-serif;
-$font-sans: 'Lato', sans-serif;
+$font-sans: 'Roboto', sans-serif;
 $font-xxs: 14px;
 $font-xs: 16px;
 $font-sm: 18px;
@@ -73,3 +113,103 @@ $space-md: 20px;
 $space-lg: 30px;
 $space-xl: 50px;
 $space-xxl: 100px;
+$space-3xl: 150px;
+
+
+
+/* THEME MAPPING */
+$section-themes: (
+  "sage": (bg: $sage,
+    text: #fff,
+    blockquote-text: $sage-dk,
+    link: $sage-dk,
+    link-hover: $sage-lt,
+    accent-primary: $sage-dk,
+    accent-secondary: $sage-lt,
+    light: (bg: $sage-lt,
+      text: #000,
+      blockquote-text: $sage-dk,
+      link: $sage-dk,
+      link-hover: $sage,
+      accent-primary: $sage-dk,
+      accent-secondary: $sage ),
+    dark: (bg: $sage-dk,
+      text: #fff,
+      blockquote-text: $sage-lt,
+      link: $gold,
+      link-hover: $gold-lt,
+      accent-primary: $gold,
+      accent-secondary: $sage-lt )),
+
+  "navy": (bg: $navy,
+    text: #fff,
+    blockquote-text: $navy-lt,
+    link: $gold,
+    link-hover: $gold-lt,
+    accent-primary: $gold,
+    accent-secondary: $navy-lt,
+    light: (bg: $navy-lt,
+      text: #000,
+      blockquote-text: $navy,
+      link: $navy,
+      link-hover: $navy-dk,
+      accent-primary: $navy,
+      accent-secondary: $navy-dk, ),
+    dark: (bg: $navy-dk,
+      blockquote-text: $navy-lt,
+      link: $gold,
+      link-hover: $gold-lt,
+      accent-secondary: $sage)),
+
+  "tan": (bg: $tan,
+    text: #000,
+    blockquote-text: #000,
+    link: $tan-dk,
+    link-hover: $tan-lt,
+    accent-primary: $tan-dk,
+    accent-secondary: $tan-lt,
+    light: (bg: $tan-lt,
+      link: $navy,
+      link-hover: $navy-dk,
+      accent-primary: #000,
+      accent-secondary: $tan-dk ),
+    dark: (bg: $tan-dk,
+      text: #fff,
+      blockquote-text: $tan-lt,
+      link: $tan-lt,
+      link-hover: $tan,
+      accent-primary: $tan-lt,
+      accent-secondary: $tan)),
+
+  "black": (bg: #000,
+    text: #fff),
+
+  "gray": (bg: $gray-xl )
+);
+
+$heading-themes: (
+  "sage": (h1: $sage-200,
+    text: #fff,
+    light: (h1: $sage-dk,
+      text: #000)),
+
+  "navy": (h1: $navy-200,
+    text: #fff,
+    light: (h1: $navy-dk,
+      text: #000)),
+
+  "tan": (h1: $navy,
+    text: #fff,
+    light: (h1: $tan-dk,
+      text: #000)),
+
+  "white": (h1: $gray,
+    text: #000),
+
+  "black": (h1: $gray,
+    text: #fff),
+);
+
+@function theme-value($theme, $key) {
+  @return map-get($theme, $key);
+}

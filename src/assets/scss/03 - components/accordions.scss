@@ -8,12 +8,11 @@
     }
 
     .accordion-item {
-        border: 1px solid utilities.$primary;
+        border: 1px solid utilities.$tan;
+        border-radius: utilities.$border-radius;
         margin-bottom: utilities.$space-md;
 
         h4 {
-            background: utilities.$primary;
-            color: #fff;
             cursor: pointer;
             display: block;
             font-size: utilities.$font-sm;

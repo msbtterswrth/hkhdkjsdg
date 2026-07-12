@@ -1,5 +1,5 @@
 @use 'variables.scss' as variables;
-
+@use "sass:map";
 
 //ANIMATIONS
 @mixin transition($params...) {
@@ -95,7 +95,7 @@
   color: $text;
   cursor: pointer;
   display: inline-block;
-  font-family: variables.$font-script;
+  font-family: variables.$font-display;
   font-size: variables.$font-xxs;
   font-weight: 500;
   line-height: 1.5em;
@@ -106,7 +106,8 @@
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   text-align: center;
-  text-decoration: none !important;  user-select: none;
+  text-decoration: none !important;
+  user-select: none;
   vertical-align: middle;
   white-space: normal;
   z-index: 1;
@@ -118,6 +119,7 @@
     border: 2px solid $bghover;
     color: #fff;
   }
+
   // &:last-child {
   //   margin-bottom: 0;
   // }
@@ -152,32 +154,48 @@
   letter-spacing: 1px;
   line-height: 1emm;
   padding: 0 0 0 variables.$space-sm;
-  text-decoration: none!important;
+  text-decoration: none !important;
   text-transform: uppercase;
   transition: padding 0.3s cubic-bezier(0, 0, 0.2, 1), color 0.3s linear, border 0.3s linear;
-  @if $background == variables.$primary {
+
+  @if $background ==variables.$primary {
     border-left: 4px solid variables.$primary-lt;
-  } @else if $background == variables.$secondary {
+  }
+
+  @else if $background ==variables.$secondary {
     border-left: 4px solid variables.$secondary-lt;
-  } @else if $background == variables.$tertiary {
+  }
+
+  @else if $background ==variables.$tertiary {
     border-left: 4px solid variables.$tertiary-lt;
-  } @else if $background == #000 {
+  }
+
+  @else if $background ==#000 {
     border-left: 4px solid #000;
-  } @else if $background == #fff {
+  }
+
+  @else if $background ==#fff {
     border-left: 4px solid #fff;
   }
 
   &:hover,
   &:focus {
-    color: $background!important;
+    color: $background !important;
     padding-left: 20px;
-    @if $background == variables.$primary {
+
+    @if $background ==variables.$primary {
       border-left: 4px solid variables.$primary-dk;
-    } @else if $background == variables.$secondary {
+    }
+
+    @else if $background ==variables.$secondary {
       border-left: 4px solid variables.$secondary-dk;
-    } @else if $background == variables.$tertiary {
+    }
+
+    @else if $background ==variables.$tertiary {
       border-left: 4px solid variables.$tertiary-dk;
-    } @else if $background == #000 {
+    }
+
+    @else if $background ==#000 {
       border-left: 4px solid variables.$gray-dk;
     }
   }
@@ -204,13 +222,20 @@
     top: 50%;
     transition: right .3s linear;
     transform: translate(0%, -50%);
-    @if $background == variables.$primary-lt {
+
+    @if $background ==variables.$primary-lt {
       color: variables.$primary-dk;
-    } @else if $background == variables.$secondary {
+    }
+
+    @else if $background ==variables.$secondary {
       color: variables.$secondary-dk;
-    } @else if $background == variables.$tertiary {
+    }
+
+    @else if $background ==variables.$tertiary {
       color: variables.$tertiary-dk;
-    } @else if $background == #000 {
+    }
+
+    @else if $background ==#000 {
       color: variables.$gray-dk;
     }
   }
@@ -352,5 +377,198 @@
 
   &:-ms-input-placeholder {
     @content;
+  }
+}
+
+@mixin section-theme($config) {
+  $bg: map.get($config, bg);
+  $text: map.get($config, text);
+  $blockquote-text: map.get($config, blockquote-text);
+  $link: map.get($config, link);
+  $link-hover: map.get($config, link-hover);
+  $accent-primary: map.get($config, accent-primary);
+  $accent-secondary: map.get($config, accent-secondary);
+  $light: map.get($config, light);
+  $dark: map.get($config, dark);
+
+  background: $bg;
+
+  .body-text,
+  .blurb {
+    @include link-theme($config);
+  }
+
+  @include blockquote-theme($config);
+
+  @if $text {
+    color: $text;
+  }
+
+
+  @if $accent-primary {
+    .container::before {
+      color: $accent-primary;
+    }
+
+    .eyebrow {
+      color: $accent-secondary;
+    }
+
+    .heading::after {
+      background: $accent-primary;
+    }
+  }
+
+  // Light variant
+  @if $light {
+    &.light {
+      background: map.get($light, bg);
+
+      @if map.get($light, text) {
+        color: map.get($light, text);
+      }
+
+      .body-text,
+      .blurb {
+        @include link-theme($light);
+      }
+
+      @include blockquote-theme($light);
+
+      @if map.get($light, accent-primary) {
+
+        .container::before {
+          color: map.get($light, accent-primary)
+        }
+    
+       .eyebrow {
+          color: map.get($light, accent-secondary)
+       }
+
+        .heading::after {
+          background: map.get($light, accent-primary);
+        }
+      }
+    }
+  }
+
+  // Dark variant
+  @if $dark {
+    &.dark {
+      background: map.get($dark, bg);
+
+      @if map.get($dark, text) {
+        color: map.get($dark, text);
+      }
+
+      .body-text,
+      .blurb {
+        @include link-theme($dark);
+      }
+
+      @include blockquote-theme($dark);
+
+      @if map.get($dark, accent-primary) {
+        .container::before {
+          color: map.get($dark, accent-primary)
+        }
+    
+       .eyebrow {
+          color: map.get($dark, accent-secondary)
+       }
+
+        .heading::after {
+          background: map.get($dark, accent-primary);
+        }
+      }
+    }
+  }
+}
+
+@mixin link-theme($theme) {
+  @if map.get($theme, link) {
+    a {
+      color: map.get($theme, link);
+
+      &:hover,
+      &:focus {
+        color: if(sass(map.get($theme, link-hover)): map.get($theme, link-hover); else: map.get($theme, link));
+      }
+    }
+  }
+}
+
+@mixin blockquote-theme($config) {
+  $blockquote-text: map.get($config, blockquote-text);
+  $accent-primary: map.get($config, accent-primary);
+  $text: map.get($config, text);
+
+  blockquote {
+    @if $blockquote-text {
+      color: $blockquote-text;
+    }
+
+    @if $text {
+      strong {
+        color: $text;
+      }
+    }
+
+    @if $accent-primary {
+      &::before {
+        color: $accent-primary;
+      }
+    }
+  }
+}
+
+@mixin card-theme($theme) {
+  .inner {
+    background: map.get($theme, bg);
+
+    @if map.get($theme, text) {
+      color: map.get($theme, text);
+    }
+
+    @include link-theme($theme);
+  }
+
+  &.has-icon {
+    .icon {
+
+      svg,
+      svg>* {
+        stroke: map.get($theme, accent-primary);
+      }
+    }
+
+    @if map.get($theme, accent-primary) {
+
+      h2,
+      h3,
+      .heading {
+        color: map.get($theme, accent-primary);
+
+        strong {
+          color: map.get($theme, accent-secondary);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+@mixin heading-theme($config) {
+  $h1: map.get($config, h1);
+  $light: map.get($config, light);
+
+  color: $h1;
+
+  @if $light {
+    &.light {
+      @if map.get($light, h1) {
+        color: map.get($light, h1);
+      }
+    }
   }
 }

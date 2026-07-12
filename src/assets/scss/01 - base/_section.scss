@@ -4,44 +4,18 @@
   color: #000;
 
   &.has-bg {
-    padding: calc(1.5 * utilities.$space-xl) utilities.$space-md calc(1.5 * utilities.$space-xl);
+    padding: utilities.$space-xl;
 
     @include utilities.breakpoint(xs) {
       padding: utilities.$space-lg 0;
     }
   }
 
-  &.primary {
-    background: utilities.$primary;
-    color: #000;
-  }
-
-  &.primary-lt {
-    background: utilities.$primary-lt;
-    color: #000;
-  }
-
-  &.primary-dk {
-    background: utilities.$primary-xdk;
-    color: #fff;
-  }
-
-  &.secondary {
-    background: utilities.$secondary;
-    color: #fff;
-  }
-
-  &.tertiary {
-    background: utilities.$tertiary;
-  }
-
-  &.black {
-    background: #000;
-    color: #fff;
-  }
-
-  &.gray {
-    background: utilities.$gray-xl;
+  // Generate all theme variants
+  @each $name, $config in utilities.$section-themes {
+    &.#{$name} {
+      @include utilities.section-theme($config);
+    }
   }
 
   &.white {
@@ -53,38 +27,13 @@
     }
   }
 
-  &.bordered {
-    background: #fff;
-    padding: utilities.$space-xl utilities.$space-md;
-
-    > .container {
-      &::before {
-        border-top: 5px solid utilities.$primary-lt;
-        content: "";
-        margin: 0 auto;
-        padding-bottom: utilities.$space-md;
-        position: relative;
-        width: 60%;
-      }
-
-      &::after {
-        border-bottom: 5px solid utilities.$primary-lt;
-        content: "";
-        margin: 0 auto;
-        padding-top: utilities.$space-md;
-        position: relative;
-        width: 60%;
-      }
-    }
+  .container {
+    max-width: 100%;
   }
 
   .body-text {
-    margin: 0 auto utilities.$space-lg;
-    text-align: center;
-
-    @include utilities.breakpoint(lg) {
-      width: 65%;
-    }
+    margin: 0 0 utilities.$space-xl;
+    max-width: 65rem;
 
     &:last-child {
       margin: 0 auto;
@@ -93,11 +42,10 @@
 
   .heading {
     margin: 0 0 utilities.$space-lg 0;
-    text-align: center;
   }
 
   .paragraph {
-    + .paragraph--type--wysiwyg {
+    +.paragraph--type--wysiwyg {
       margin-top: utilities.$space-xl;
     }
   }
