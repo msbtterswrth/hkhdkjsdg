@@ -7,122 +7,257 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const rename = require('gulp-rename');
 const sourcemaps = require('gulp-sourcemaps');
-const { deleteAsync } = require('del');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
 const fs = require('fs');
 
 // Configuration
 const config = {
-    src: {
-        scss: 'src/assets/scss/**/*.scss',
-        js: ['script.js'].map(file => `src/assets/js/${file}`),
-        html: './*.html'
-    },
-    dest: {
-        css: 'src/assets/css',
-        js: 'src/assets/js',
-        dist: 'dist'
-    },
-    isProduction: process.env.NODE_ENV === 'production'
+  src: {
+    scss: 'src/assets/scss/styles.scss',
+
+    js: [
+      'src/assets/js/components/**/*.js',
+      'src/assets/js/script.js',
+    ],
+
+    html: './*.html',
+    fonts: 'src/assets/fonts/**/*',
+  },
+
+  dest: {
+    css: 'src/assets/build/css',
+    js: 'src/assets/build/js',
+    dist: 'dist',
+    distAssets: 'dist/assets',
+  },
+
+  isProduction: process.env.NODE_ENV === 'production',
 };
 
-// Ensure directories exist
+// Ensure destination directories exist.
 function ensureDirectoriesExist() {
-    [config.dest.css, config.dest.js, config.dest.dist].forEach(dir => {
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
-    });
+  [
+    config.dest.css,
+    config.dest.js,
+    config.dest.dist,
+    config.dest.distAssets,
+  ].forEach((directory) => {
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, {
+        recursive: true,
+      });
+    }
+  });
 }
 
-// Clean task
+// Remove generated files.
 async function clean() {
-    ensureDirectoriesExist();
-    await deleteAsync([
-        `${config.dest.css}/*.min.css`,
-        `${config.dest.css}/*.min.css.map`,
-        `${config.dest.js}/*.min.js`,
-        `${config.dest.js}/*.min.js.map`,
-        `${config.dest.dist}/**/*`
-    ], { force: true });
+  const { deleteAsync } = await import('del');
+
+  return deleteAsync(
+    [
+      'src/assets/build/**/*',
+      `${config.dest.dist}/**/*`,
+    ],
+    {
+      force: true,
+    }
+  );
 }
 
-// Styles task with sourcemaps and error handling
+// Compile, prefix, and minify Sass.
 function styles() {
-    ensureDirectoriesExist();
-    return gulp.src(config.src.scss)
-        .pipe(gulpif(!config.isProduction, sourcemaps.init()))
-        .pipe(sass().on('error', sass.logError))
-        .pipe(postcss([autoprefixer(), cssnano()]))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(gulpif(!config.isProduction, sourcemaps.write('.')))
-        .pipe(gulp.dest(config.dest.css))
-        .pipe(browserSync.stream());
+  ensureDirectoriesExist();
+
+  return gulp
+    .src(config.src.scss)
+    .pipe(gulpif(!config.isProduction, sourcemaps.init()))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(
+      postcss([
+        autoprefixer(),
+        cssnano(),
+      ])
+    )
+    .pipe(
+      rename({
+        basename: 'styles',
+        suffix: '.min',
+      })
+    )
+    .pipe(
+      gulpif(
+        !config.isProduction,
+        sourcemaps.write('.')
+      )
+    )
+    .pipe(gulp.dest(config.dest.css))
+    .pipe(browserSync.stream());
 }
 
-// Scripts task with sourcemaps and error handling
+// Concatenate and minify all JavaScript components.
 function scripts() {
-    ensureDirectoriesExist();
-    return gulp.src(config.src.js, { allowEmpty: true })
-        .pipe(gulpif(!config.isProduction, sourcemaps.init()))
-        .pipe(concat('script.js'))
-        .pipe(terser().on('error', function(e) {
-            console.error(e);
-            this.emit('end');
-        }))
-        .pipe(rename({ suffix: '.min' }))
-        .pipe(gulpif(!config.isProduction, sourcemaps.write('.')))
-        .pipe(gulp.dest(config.dest.js))
-        .pipe(browserSync.stream());
+  ensureDirectoriesExist();
+
+  return gulp
+    .src(config.src.js, {
+      allowEmpty: true,
+    })
+    .pipe(gulpif(!config.isProduction, sourcemaps.init()))
+    .pipe(concat('script.js'))
+    .pipe(
+      terser().on('error', function handleTerserError(error) {
+        console.error(error);
+        this.emit('end');
+      })
+    )
+    .pipe(
+      rename({
+        suffix: '.min',
+      })
+    )
+    .pipe(
+      gulpif(
+        !config.isProduction,
+        sourcemaps.write('.')
+      )
+    )
+    .pipe(gulp.dest(config.dest.js));
 }
 
-// HTML task
+// Copy HTML files into dist.
 function html() {
-    ensureDirectoriesExist();
-    return gulp.src(config.src.html)
-        .pipe(gulp.dest(config.dest.dist));
+  ensureDirectoriesExist();
+
+  return gulp
+    .src(config.src.html)
+    .pipe(gulp.dest(config.dest.dist));
 }
 
-// BrowserSync server
-function serve() {
-    browserSync.init({
-        server: {
-            baseDir: './',
-            routes: {
-                "/src": "src"
-            }
-        },
-        notify: false
-    });
+// Copy compiled assets and fonts into dist/assets.
+function assets() {
+  ensureDirectoriesExist();
+
+  const css = gulp
+    .src(`${config.dest.css}/**/*`, {
+      allowEmpty: true,
+    })
+    .pipe(gulp.dest(`${config.dest.distAssets}/build/css`));
+
+  const js = gulp
+    .src(`${config.dest.js}/**/*`, {
+      allowEmpty: true,
+    })
+    .pipe(gulp.dest(`${config.dest.distAssets}/build/js`));
+
+  const fonts = gulp
+    .src(config.src.fonts, {
+      allowEmpty: true,
+      encoding: false,
+    })
+    .pipe(gulp.dest(`${config.dest.distAssets}/fonts`));
+
+  return Promise.all([
+    streamToPromise(css),
+    streamToPromise(js),
+    streamToPromise(fonts),
+  ]);
 }
 
-// Watch task
-function watch() {
-    gulp.watch(config.src.scss, styles);
-    gulp.watch(config.src.js, scripts);
-    gulp.watch(config.src.html).on('change', browserSync.reload);
+function streamToPromise(stream) {
+  return new Promise((resolve, reject) => {
+    stream.on('end', resolve);
+    stream.on('error', reject);
+  });
 }
 
-// Build task for production
+// Start BrowserSync using dist as the site root.
+function serve(done) {
+  browserSync.init({
+    server: {
+      baseDir: config.dest.dist,
+    },
+    notify: false,
+  });
+
+  done();
+}
+
+// Reload BrowserSync.
+function reload(done) {
+  browserSync.reload();
+  done();
+}
+
+// Rebuild styles and copy them to dist.
+const buildStyles = gulp.series(
+  styles,
+  assets
+);
+
+// Rebuild scripts and copy them to dist.
+const buildScripts = gulp.series(
+  scripts,
+  assets,
+  reload
+);
+
+// Copy fonts and reload.
+const copyFonts = gulp.series(
+  assets,
+  reload
+);
+
+// Watch source files.
+function watchFiles() {
+  gulp.watch(config.src.scss, buildStyles);
+  gulp.watch('src/assets/scss/**/*.scss', buildStyles);
+
+  gulp.watch(
+    [
+      'src/assets/js/components/**/*.js',
+      'src/assets/js/script.js',
+    ],
+    buildScripts
+  );
+
+  gulp.watch(
+    config.src.fonts,
+    copyFonts
+  );
+
+  gulp.watch(
+    config.src.html,
+    gulp.series(html, reload)
+  );
+}
+
+// Compile all source files.
+const compile = gulp.series(
+  gulp.parallel(styles, scripts),
+  gulp.parallel(html, assets)
+);
+
+// Production build.
 const build = gulp.series(
-    clean,
-    gulp.parallel(styles, scripts),
-    html
+  clean,
+  compile
 );
 
-// Development task
+// Development environment.
 const dev = gulp.series(
-    clean,
-    gulp.parallel(styles, scripts),
-    gulp.parallel(serve, watch)
+  clean,
+  compile,
+  gulp.parallel(serve, watchFiles)
 );
 
-// Export tasks
+// Exports.
 exports.clean = clean;
 exports.styles = styles;
 exports.scripts = scripts;
 exports.html = html;
+exports.assets = assets;
 exports.build = build;
 exports.dev = dev;
 exports.default = dev;

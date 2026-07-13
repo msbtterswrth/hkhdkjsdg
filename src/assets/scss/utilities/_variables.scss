@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /*COLORS*/
 $gray-xl: #f4f4f4;
 $gray-lt: #A0A0A0;
@@ -126,6 +128,9 @@ $section-themes: (
     link-hover: $sage-lt,
     accent-primary: $sage-dk,
     accent-secondary: $sage-lt,
+    button: (bg: $sage,
+      hover: $sage-dk,
+      text: #fff),
     light: (bg: $sage-lt,
       text: #000,
       blockquote-text: $sage-dk,
@@ -148,6 +153,9 @@ $section-themes: (
     link-hover: $gold-lt,
     accent-primary: $gold,
     accent-secondary: $navy-lt,
+    button: (bg: $navy,
+      hover: $navy-900,
+      text: #fff),
     light: (bg: $navy-lt,
       text: #000,
       blockquote-text: $navy,
@@ -168,6 +176,9 @@ $section-themes: (
     link-hover: $tan-lt,
     accent-primary: $tan-dk,
     accent-secondary: $tan-lt,
+    button: (bg: $tan,
+      hover: $tan-dk,
+      text: #000),
     light: (bg: $tan-lt,
       link: $navy,
       link-hover: $navy-dk,
@@ -182,7 +193,18 @@ $section-themes: (
       accent-secondary: $tan)),
 
   "black": (bg: #000,
-    text: #fff),
+    text: #fff,
+
+    button: (bg: #000,
+      hover: $gray-dk,
+      text: #fff)),
+
+  "white": (bg: #fff,
+    text: #000,
+
+    button: (bg: #fff,
+      hover: $gray-lt,
+      text: #000)),
 
   "gray": (bg: $gray-xl )
 );
@@ -211,5 +233,5 @@ $heading-themes: (
 );
 
 @function theme-value($theme, $key) {
-  @return map-get($theme, $key);
+  @return map.get($theme, $key);
 }

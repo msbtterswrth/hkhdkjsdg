@@ -1,80 +1,63 @@
 @use '../utilities' as utilities;
+@use 'sass:map';
 
 .site-wrap,
 .offcanvas {
   .btn {
-    &.primary {
-      @include utilities.button(utilities.$primary-lt, utilities.$primary-dk, #000);
+    @each $theme-name, $theme in utilities.$section-themes {
+      @if map.has-key($theme, button) {
+        $button-theme: utilities.theme-value($theme, button);
 
-      &.outline {
-        @include utilities.button(utilities.$primary-lt, utilities.$primary-dk, #000, $outline: true)
-      }
+        &.#{$theme-name} {
+          @include utilities.button($button-theme);
 
-      &.large {
-        @include utilities.button(utilities.$primary-lt, utilities.$primary-dk, #000, $large: true);
-      }
-    }
+          &.outline {
+            @include utilities.button(
+              $button-theme,
+              $outline: true
+            );
+          }
 
-    &.secondary {
-      @include utilities.button(utilities.$secondary, utilities.$secondary-dk, #000);
+          &.large {
+            @include utilities.button(
+              $button-theme,
+              $large: true
+            );
+          }
 
-      &.outline {
-        @include utilities.button(utilities.$secondary, utilities.$secondary-dk, #000, $outline: true)
-      }
-
-      &.large {
-        @include utilities.button(utilities.$secondary, utilities.$secondary-dk, #000, $large: true);
-      }
-    }
-
-    &.tertiary {
-      @include utilities.button(utilities.$tertiary, utilities.$tertiary-dk, #000);
-
-      &.outline {
-        @include utilities.button(utilities.$tertiary, utilities.$tertiary-dk, #000, $outline: true)
-      }
-
-      &.large {
-        @include utilities.button(utilities.$tertiary, utilities.$tertiary-dk, #000, $large: true);
-      }
-    }
-
-    &.black {
-      @include utilities.button(#000, utilities.$gray-dk, #fff);
-
-      &.outline {
-        @include utilities.button(#000, utilities.$gray-dk, #fff, $outline: true)
-      }
-
-      &.large {
-        @include utilities.button(#000, utilities.$gray-dk, #fff, $large: true);
-      }
-    }
-
-    &.white {
-      @include utilities.button(#fff, utilities.$gray, #000);
-
-      &.outline {
-        @include utilities.button(#fff, utilities.$gray, #000, $outline: true)
-      }
-
-      &.large {
-        @include utilities.button(#fff, utilities.$gray, #000, $large: true);
+          &.outline.large,
+          &.large.outline {
+            @include utilities.button(
+              $button-theme,
+              $outline: true,
+              $large: true
+            );
+          }
+        }
       }
     }
   }
 
   .action-link {
     &.primary {
-      @include utilities.action-link(utilities.$primary,  utilities.$gray-dk);
+      @include utilities.action-link(
+        utilities.$primary,
+        utilities.$gray-dk
+      );
     }
 
     &.secondary {
-      @include utilities.action-link(utilities.$secondary, utilities.$gray-dk);
+      @include utilities.action-link(
+        utilities.$secondary,
+        utilities.$gray-dk
+      );
     }
 
     &.tertiary {
-      @include utilities.action-link(utilities.$tertiary, utilities.$gray-dk);
+      @include utilities.action-link(
+        utilities.$tertiary,
+        utilities.$gray-dk
+      );
     }
 
     &.black {
@@ -98,6 +81,7 @@
     &.tertiary {
       @include utilities.arrow-link(utilities.$tertiary);
     }
+
     &.black {
       @include utilities.arrow-link(#000);
     }

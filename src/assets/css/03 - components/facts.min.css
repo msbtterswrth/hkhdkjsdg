@@ -1,2 +1,0 @@
-.facts{display:-ms-grid;display:grid;gap:20px;grid:auto/40% 1fr}@media (max-width:767px){.facts{grid:auto/1fr}}.facts .fact-card{border:1px solid #f4f1e9;border-radius:5px;border-top:4px solid #eba030;padding:20px;text-align:center}.facts .fact-card .stat{display:block;font-size:72px;font-weight:800;margin-bottom:20px}.facts .fact-card .title{font-size:16px}
-/*# sourceMappingURL=facts.min.css.map */

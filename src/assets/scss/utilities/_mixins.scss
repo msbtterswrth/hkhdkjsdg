@@ -1,6 +1,7 @@
 @use 'variables.scss' as variables;
 @use "sass:map";
 
+
 //ANIMATIONS
 @mixin transition($params...) {
   -webkit-transition: $params;
@@ -87,52 +88,60 @@
 }
 
 //BUTTONS & LINKS
-@mixin button($background, $bghover, $text, $outline: false, $large: false) {
+@mixin button(
+  $button-theme,
+  $outline: false,
+  $large: false
+) {
+  $background: variables.theme-value($button-theme, bg);
+  $background-hover: variables.theme-value($button-theme, hover);
+  $text: variables.theme-value($button-theme, text);
+
   background: $background;
-  border-radius: variables.$border-radius;
   border: 2px solid $background;
+  border-radius: variables.$border-radius;
   box-shadow: none;
   color: $text;
   cursor: pointer;
   display: inline-block;
   font-family: variables.$font-display;
-  font-size: variables.$font-xxs;
+  font-size: variables.$font-xs;
   font-weight: 500;
   line-height: 1.5em;
   margin-bottom: variables.$space-md;
   outline: none !important;
-  padding: variables.$space-xs variables.$space-lg;
+  padding: variables.$space-sm variables.$space-lg;
   position: relative;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
   text-align: center;
   text-decoration: none !important;
+  touch-action: manipulation;
   user-select: none;
   vertical-align: middle;
   white-space: normal;
   z-index: 1;
-  @include transition(background .3s linear, border .3s linear, color .3s linear);
+
+  @include transition(
+    background 0.3s linear,
+    border 0.3s linear,
+    color 0.3s linear
+  );
 
   &:hover,
-  &:focus {
-    background: $bghover;
-    border: 2px solid $bghover;
-    color: #fff;
+  &:focus-visible {
+    background: $background-hover;
+    border-color: $background-hover;
+    color: $text;
   }
 
-  // &:last-child {
-  //   margin-bottom: 0;
-  // }
-
   @if $outline {
-    background: none;
-    border: 2px solid $background;
+    background: transparent;
+    border-color: $background;
     color: $background;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       background: $background;
-      border: 2px solid $background;
+      border-color: $background;
       color: $text;
     }
   }
@@ -440,10 +449,10 @@
         .container::before {
           color: map.get($light, accent-primary)
         }
-    
-       .eyebrow {
+
+        .eyebrow {
           color: map.get($light, accent-secondary)
-       }
+        }
 
         .heading::after {
           background: map.get($light, accent-primary);
@@ -472,10 +481,10 @@
         .container::before {
           color: map.get($dark, accent-primary)
         }
-    
-       .eyebrow {
+
+        .eyebrow {
           color: map.get($dark, accent-secondary)
-       }
+        }
 
         .heading::after {
           background: map.get($dark, accent-primary);
@@ -487,7 +496,7 @@
 
 @mixin link-theme($theme) {
   @if map.get($theme, link) {
-    a {
+    a:not(.btn) {
       color: map.get($theme, link);
 
       &:hover,
