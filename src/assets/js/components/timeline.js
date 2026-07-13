@@ -1,37 +1,42 @@
-(function (Drupal, $, window) {
+(function () {
   'use strict';
 
-  Drupal.behaviors.timeline = {
-    attach: function (context, settings) {
+  function initializeTimelines() {
+    $('.timeline .items').each(function () {
+      const $slider = $(this);
 
-      $(once('timeline', '.timeline .items', context)).each(function () {
-        let $slider = $(this);
+      // Prevent duplicate initialization.
+      if ($slider.hasClass('slick-initialized')) {
+        return;
+      }
 
-        if (typeof $slider.slick !== 'undefined') {
-          $slider.slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            variableWidth: true,
-            rows: 0,
-            prevArrow: $slider.next('.arrows').find('.prev-slide'),
-            nextArrow: $slider.next('.arrows').find('.next-slide'),
-            responsive: [
-              {
-                breakpoint: 1200,
-                settings: {
-                  slidesToShow: 2,
-                }
-              },
-              {
-                breakpoint: 768,
-                settings: {
-                  slidesToShow: 1
-                }
-              }
-            ]
-          });
-        }
+      $slider.slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        variableWidth: true,
+        rows: 0,
+        prevArrow: $slider.next('.arrows').find('.prev-slide'),
+        nextArrow: $slider.next('.arrows').find('.next-slide'),
+        responsive: [
+          {
+            breakpoint: 1200,
+            settings: {
+              slidesToShow: 2
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1
+            }
+          }
+        ]
       });
-    }
-  };
-}(Drupal, jQuery, this));
+    });
+  }
+
+  $(document).ready(function () {
+    initializeTimelines();
+  });
+
+})();
