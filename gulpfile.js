@@ -10,6 +10,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync').create();
 const gulpif = require('gulp-if');
 const fs = require('fs');
+const fileInclude = require('gulp-file-include');
 
 // Configuration
 const config = {
@@ -22,7 +23,13 @@ const config = {
       'src/assets/js/script.js',
     ],
 
-    html: './*.html',
+    html: 'src/pages/**/*.html',
+    htmlWatch: [
+      'src/pages/**/*.html',
+      'src/partials/**/*.html',
+      'src/components/**/*.html',
+    ],
+
     fonts: 'src/assets/fonts/**/*',
   },
 
@@ -145,6 +152,13 @@ function html() {
     .src(config.src.html, {
       allowEmpty: true,
     })
+    .pipe(
+      fileInclude({
+        prefix: '@@',
+        basepath: '@file',
+        indent: true,
+      })
+    )
     .pipe(gulp.dest(config.dest.dist));
 }
 
@@ -259,7 +273,7 @@ function watchFiles() {
   );
 
   gulp.watch(
-    config.src.html,
+    config.src.htmlWatch,
     buildHtml
   );
 }

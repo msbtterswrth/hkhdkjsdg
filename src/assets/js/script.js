@@ -109,6 +109,46 @@
         });
     }
 
+    // Add a class to active page links
+    (function initActiveLinks() {
+        'use strict';
+
+        function normalizePath(path) {
+            path = path
+                .replace(/index\.html$/, '')
+                .replace(/\/$/, '');
+
+            return path || '/';
+        }
+
+        const currentPath = normalizePath(window.location.pathname);
+
+        document.querySelectorAll('a[href]').forEach((link) => {
+            const href = link.getAttribute('href');
+
+            // Ignore external and utility links.
+            if (
+                !href ||
+                href.startsWith('#') ||
+                href.startsWith('mailto:') ||
+                href.startsWith('tel:') ||
+                href.startsWith('javascript:') ||
+                /^https?:\/\//i.test(href)
+            ) {
+                return;
+            }
+
+            const url = new URL(href, window.location.origin);
+            const linkPath = normalizePath(url.pathname);
+
+            if (linkPath === currentPath) {
+                link.classList.add('is-active');
+                link.closest('li')?.classList.add('is-active');
+            }
+        });
+    })();
+
+
     // Add class to external links
     function externalLinks() {
         document.querySelectorAll('a[href*="//"]').forEach(link => {
@@ -123,6 +163,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         initDIE();
         initSmoothScroll();
+        initActiveLinks();
         externalLinks();
     });
 })(); 

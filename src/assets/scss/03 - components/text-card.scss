@@ -1,100 +1,62 @@
 @use '../utilities' as utilities;
-
+@use 'sass:map';
 
 .base__text-card {
   height: 100%;
 
   .inner {
     border-radius: utilities.$border-radius;
-    box-shadow: 10px 10px 0px rgba(#000, .1);
     height: 100%;
-    padding: utilities.$space-lg utilities.$space-lg utilities.$space-xl;
+    padding: utilities.$space-lg;
 
-    .heading {
-      border-bottom: 2px solid;
+    .heading,
+    h3 {
+      font-family: utilities.$font-sans;
+      font-size: utilities.$font-lg;
       padding-bottom: utilities.$space-md;
+      font-weight: 600;
+    }
+
+    .icon {
+      margin: 0 auto;
+      position: relative;
+      text-align: left;
+      width: 100%;
+
+      svg,
+      svg>* {
+        height: 48px;
+        stroke: #000;
+      }
+
+      img {
+        width: 100%
+      }
     }
 
     p {
       &:last-child {
-        margin-bottom: 0;
+        margin-bottom: 0px;
       }
     }
   }
 
-  &.primary {
-    .inner {
-      background: utilities.$primary;
-      color: #fff;
+  @each $name, $theme in utilities.$section-themes {
+    &.#{$name} {
+      @include utilities.card-theme($theme);
 
-      .heading {
-        border-color: utilities.$secondary-lt;
+      $light: map.get($theme, light);
+      @if $light {
+        &.light {
+          @include utilities.card-theme($light);
+        }
       }
-    }
-  }
 
-  &.primary-lt {
-    .inner {
-      background: utilities.$primary-lt;
-      color: #000;
-
-      .heading {
-        border-color: utilities.$primary-dk;
-      }
-    }
-  }
-
-  &.primary-dk {
-    .inner {
-      background: utilities.$primary-dk;
-      color: #fff;
-
-      .heading {
-        border-color: utilities.$primary-lt;
-      }
-    }
-  }
-
-  &.secondary {
-    .inner {
-      background: utilities.$secondary;
-      color: #000;
-
-      .heading {
-        border-color: utilities.$secondary-dk;
-      }
-    }
-  }
-
-  &.tertiary {
-    .inner {
-      background: utilities.$tertiary;
-      color: #000;
-
-      .heading {
-        border-color: utilities.$tertiary-dk;
-      }
-    }
-  }
-
-  &.gray {
-    .inner {
-      background: utilities.$gray-xl;
-      color: #000;
-
-      .heading {
-        border-color: utilities.$primary-lt;
-      }
-    }
-  }
-
-  &.black {
-    .inner {
-      background: #000;
-      color: #fff;
-
-      .heading {
-        border-color: utilities.$secondary-lt;
+      $dark: map.get($theme, dark);
+      @if $dark {
+        &.dark {
+          @include utilities.card-theme($dark);
+        }
       }
     }
   }
@@ -104,20 +66,27 @@
       background: #fff;
       color: #000;
 
-      .heading {
-        border-color: utilities.$secondary-lt;
+      .section.white & {
+        padding: 0;
       }
-    }
-  }
 
-  &.bordered {
-    .inner {
-      background: #fff;
-      border: 2px solid utilities.$secondary;
-      color: #000;
+      .icon {
 
+        svg,
+        svg>* {
+          stroke: #000;
+        }
+      }
+
+      h2,
+      h3,
       .heading {
-        border-color: utilities.$secondary-lt;
+        color: #000;
+
+        strong {
+          color: utilities.$navy;
+          font-weight: 600;
+        }
       }
     }
   }

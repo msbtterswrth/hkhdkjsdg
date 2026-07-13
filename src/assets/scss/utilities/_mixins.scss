@@ -88,11 +88,9 @@
 }
 
 //BUTTONS & LINKS
-@mixin button(
-  $button-theme,
+@mixin button($button-theme,
   $outline: false,
-  $large: false
-) {
+  $large: false) {
   $background: variables.theme-value($button-theme, bg);
   $background-hover: variables.theme-value($button-theme, hover);
   $text: variables.theme-value($button-theme, text);
@@ -120,11 +118,9 @@
   white-space: normal;
   z-index: 1;
 
-  @include transition(
-    background 0.3s linear,
+  @include transition(background 0.3s linear,
     border 0.3s linear,
-    color 0.3s linear
-  );
+    color 0.3s linear);
 
   &:hover,
   &:focus-visible {
@@ -494,6 +490,43 @@
   }
 }
 
+@mixin card-theme($theme) {
+  .inner {
+    background: map.get($theme, bg);
+
+    @if map.get($theme, text) {
+      color: map.get($theme, text);
+    }
+
+    @include link-theme($theme);
+
+
+    @if map.get($theme, accent-primary) {
+
+      h2,
+      h3,
+      .heading {
+        color: map.get($theme, accent-primary);
+
+        strong {
+          color: map.get($theme, accent-secondary);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  &.has-icon {
+    .icon {
+
+      svg,
+      svg>* {
+        stroke: map.get($theme, accent-primary);
+      }
+    }
+  }
+}
+
 @mixin link-theme($theme) {
   @if map.get($theme, link) {
     a:not(.btn) {
@@ -526,42 +559,6 @@
     @if $accent-primary {
       &::before {
         color: $accent-primary;
-      }
-    }
-  }
-}
-
-@mixin card-theme($theme) {
-  .inner {
-    background: map.get($theme, bg);
-
-    @if map.get($theme, text) {
-      color: map.get($theme, text);
-    }
-
-    @include link-theme($theme);
-  }
-
-  &.has-icon {
-    .icon {
-
-      svg,
-      svg>* {
-        stroke: map.get($theme, accent-primary);
-      }
-    }
-
-    @if map.get($theme, accent-primary) {
-
-      h2,
-      h3,
-      .heading {
-        color: map.get($theme, accent-primary);
-
-        strong {
-          color: map.get($theme, accent-secondary);
-          font-weight: 600;
-        }
       }
     }
   }
