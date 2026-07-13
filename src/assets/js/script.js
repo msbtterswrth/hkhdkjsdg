@@ -163,7 +163,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         initDIE();
         initSmoothScroll();
-        initActiveLinks();
         externalLinks();
     });
 })(); 

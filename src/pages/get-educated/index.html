@@ -1,55 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rally Point</title>
-  <link rel="icon" type="image/png" href="assets/images/favicon.png">
-  <link rel="preload" href="assets/fonts/icons.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:image" content="">
-  <meta property="og:url" content="">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="">
-  <meta name="twitter:description" content="">
-  <meta name="twitter:image" content="">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
-  <link rel="stylesheet" href="assets/build/css/styles.min.css">
-</head>
+@@include('../../partials/head.html')
 
 <body>
   <div class="front site-wrap">
     <a id="main-content" tabindex="-1"></a>
-    <header class="header">
-          <div class="container">
-            <a href=""><img class="" src="" /></a>
-            <nav class="nav">
-              <ul class="menu">
-                <li>
-                  <a href="/">Home</a>
-                </li>
-                <li>
-                  <a href="/get-educated.html">Get Educated</a>
-                </li>
-                <li>
-                  <a href="">Meet Rally Point</a>
-                </li>
-                <li>
-                  <a href="">Submit a Story</a>
-                </li>
-                <li>
-                  <a href="" class="btn white outline">Take Action</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </header>
+    @@include('../../partials/header.html')
 
     <banner class="banner" role="banner" aria-label="Banner">
       <div class="container-fluid">
@@ -219,7 +175,7 @@
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
     </script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
-  <script src="assets//build/js/script.min.js"></script>
+  <script src="/assets//build/js/script.min.js"></script>
 </body>
 
 </html>
