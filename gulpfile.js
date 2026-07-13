@@ -15,6 +15,7 @@ const fs = require('fs');
 const config = {
   src: {
     scss: 'src/assets/scss/styles.scss',
+    scssWatch: 'src/assets/scss/**/*.scss',
 
     js: [
       'src/assets/js/components/**/*.js',
@@ -30,6 +31,7 @@ const config = {
     js: 'src/assets/build/js',
     dist: 'dist',
     distAssets: 'dist/assets',
+    rootAssets: 'assets',
   },
 
   isProduction: process.env.NODE_ENV === 'production',
@@ -42,12 +44,21 @@ function ensureDirectoriesExist() {
     config.dest.js,
     config.dest.dist,
     config.dest.distAssets,
+    config.dest.rootAssets,
   ].forEach((directory) => {
     if (!fs.existsSync(directory)) {
       fs.mkdirSync(directory, {
         recursive: true,
       });
     }
+  });
+}
+
+// Convert a Gulp stream to a Promise.
+function streamToPromise(stream) {
+  return new Promise((resolve, reject) => {
+    stream.on('end', resolve);
+    stream.on('error', reject);
   });
 }
 
@@ -59,6 +70,7 @@ async function clean() {
     [
       'src/assets/build/**/*',
       `${config.dest.dist}/**/*`,
+      `${config.dest.rootAssets}/**/*`,
     ],
     {
       force: true,
@@ -92,8 +104,7 @@ function styles() {
         sourcemaps.write('.')
       )
     )
-    .pipe(gulp.dest(config.dest.css))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(config.dest.css));
 }
 
 // Concatenate and minify all JavaScript components.
@@ -131,7 +142,9 @@ function html() {
   ensureDirectoriesExist();
 
   return gulp
-    .src(config.src.html)
+    .src(config.src.html, {
+      allowEmpty: true,
+    })
     .pipe(gulp.dest(config.dest.dist));
 }
 
@@ -165,18 +178,26 @@ function assets() {
   ]);
 }
 
-function streamToPromise(stream) {
-  return new Promise((resolve, reject) => {
-    stream.on('end', resolve);
-    stream.on('error', reject);
-  });
+// Copy the completed dist build back to the project root for GitHub Pages.
+//
+// encoding: false is required so binary files such as fonts are not corrupted.
+function publish() {
+  ensureDirectoriesExist();
+
+  return gulp
+    .src(`${config.dest.dist}/**/*`, {
+      base: config.dest.dist,
+      allowEmpty: true,
+      encoding: false,
+    })
+    .pipe(gulp.dest('./'));
 }
 
-// Start BrowserSync using dist as the site root.
+// Start BrowserSync using the project root.
 function serve(done) {
   browserSync.init({
     server: {
-      baseDir: config.dest.dist,
+      baseDir: './',
     },
     notify: false,
   });
@@ -190,35 +211,45 @@ function reload(done) {
   done();
 }
 
-// Rebuild styles and copy them to dist.
+// Compile styles, copy to dist, publish to root, and reload.
 const buildStyles = gulp.series(
   styles,
-  assets
-);
-
-// Rebuild scripts and copy them to dist.
-const buildScripts = gulp.series(
-  scripts,
   assets,
+  publish,
   reload
 );
 
-// Copy fonts and reload.
+// Compile scripts, copy to dist, publish to root, and reload.
+const buildScripts = gulp.series(
+  scripts,
+  assets,
+  publish,
+  reload
+);
+
+// Copy fonts to dist, publish to root, and reload.
 const copyFonts = gulp.series(
   assets,
+  publish,
+  reload
+);
+
+// Copy HTML to dist, publish to root, and reload.
+const buildHtml = gulp.series(
+  html,
+  publish,
   reload
 );
 
 // Watch source files.
 function watchFiles() {
-  gulp.watch(config.src.scss, buildStyles);
-  gulp.watch('src/assets/scss/**/*.scss', buildStyles);
+  gulp.watch(
+    config.src.scssWatch,
+    buildStyles
+  );
 
   gulp.watch(
-    [
-      'src/assets/js/components/**/*.js',
-      'src/assets/js/script.js',
-    ],
+    config.src.js,
     buildScripts
   );
 
@@ -229,26 +260,28 @@ function watchFiles() {
 
   gulp.watch(
     config.src.html,
-    gulp.series(html, reload)
+    buildHtml
   );
 }
 
-// Compile all source files.
+// Compile all source files into dist.
 const compile = gulp.series(
   gulp.parallel(styles, scripts),
   gulp.parallel(html, assets)
 );
 
-// Production build.
+// Build dist and always publish it to the project root.
 const build = gulp.series(
   clean,
-  compile
+  compile,
+  publish
 );
 
-// Development environment.
+// Build, publish, serve from the root, and watch for changes.
 const dev = gulp.series(
   clean,
   compile,
+  publish,
   gulp.parallel(serve, watchFiles)
 );
 
@@ -258,6 +291,7 @@ exports.styles = styles;
 exports.scripts = scripts;
 exports.html = html;
 exports.assets = assets;
+exports.publish = publish;
 exports.build = build;
 exports.dev = dev;
 exports.default = dev;
