@@ -2,13 +2,14 @@
   "name": "rally point",
   "version": "1.0.0",
   "description": "A responsive static website for rally point",
-  "main": "src/index.html",
+  "main": "dist/index.html",
   "scripts": {
     "build": "gulp",
     "watch": "gulp watch"
   },
   "dependencies": {
-    "gulp": "^5.0.1"
+    "gulp": "^5.0.1",
+    "gulp-twig": "^1.2.0"
   },
   "devDependencies": {
     "breakpoint-sass": "^3.0.0",

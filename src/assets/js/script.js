@@ -61,7 +61,7 @@
 
     // Toggle sections for mobile
     function toggleSection() {
-        document.querySelectorAll('.menu-toggle').forEach(toggle => {
+        document.querySelectorAll('.nav-toggle').forEach(toggle => {
             toggle.addEventListener('click', () => {
                 const content = toggle.nextElementSibling;
                 const height = content.scrollHeight;
@@ -163,6 +163,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         initDIE();
         initSmoothScroll();
+        toggleMenu();
+        toggleSection();
         externalLinks();
     });
 })(); 

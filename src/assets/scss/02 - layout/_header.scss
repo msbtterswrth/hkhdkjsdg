@@ -69,18 +69,13 @@
     }
 
     .nav-toggle {
-      background: utilities.$primary-lt;
       box-shadow: none;
-      display: none;
       height: 40px;
       margin: 2px 0 0 15px;
       padding: 10px 5px;
       position: relative;
       width: 40px;
 
-      @include utilities.breakpoint(sm-max) {
-        display: block;
-      }
 
       span {
         background: #fff;
@@ -91,7 +86,7 @@
         transform-origin: center;
         @include utilities.transition(margin .3s utilities.$cubic, transform .3s utilities.$cubic, background .3s linear);
 
-        + span {
+        +span {
           margin-top: 7px;
         }
 
@@ -132,7 +127,7 @@
     .nav-open &,
     .search-open & {
       @include utilities.breakpoint(sm-max) {
-        background: utilities.$gray-xdk !important;
+        background: utilities.$navy-800 !important;
       }
     }
 
@@ -206,7 +201,7 @@
       justify-content: flex-end;
 
       @include utilities.breakpoint(sm-max) {
-        background: utilities.$gray-xdk;
+        background: utilities.$navy-800;
         display: block;
         max-height: 0;
         min-height: 100vh;
@@ -235,7 +230,7 @@
     }
 
     .menu {
-      align-items:center;
+      align-items: center;
       display: flex;
       gap: utilities.$space-sm;
       justify-content: end;
@@ -246,23 +241,34 @@
       text-align: right;
 
       @include utilities.breakpoint(sm-max) {
-        display:block;
+        display: block;
         margin: utilities.$space-xl 0;
         text-align: left;
       }
+
       li {
-        margin:0;
+        margin: 0;
+
         @include utilities.breakpoint(sm-max) {
           border-bottom: 1px solid utilities.$secondary;
           display: block;
           padding-bottom: utilities.$space-md;
           margin: 0 0 utilities.$space-md 0;
+
+          &:last-of-type {
+            border-bottom: none;
+          }
         }
 
         a {
           &.btn {
-            margin:0 0 0 utilities.$space-lg;
+            margin: 0 0 0 utilities.$space-lg;
+
+            @include utilities.breakpoint(sm-max) {
+              margin: 0;
+            }
           }
+
           &:not(.btn) {
             color: #fff;
             font-family: utilities.$font-display;
