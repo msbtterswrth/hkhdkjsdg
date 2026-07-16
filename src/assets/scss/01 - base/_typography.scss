@@ -92,14 +92,14 @@ body {
   }
 
   p {
-    font-size: utilities.$font-xs;
+    font-size: utilities.$font-sm;
     line-height: 1.5em;
     margin: 0 0 utilities.$space-md 0;
 
     &.lead {
       text-transform: none;
       font-weight: 700;
-      font-size: utilities.$font-sm;
+      font-size: utilities.$font-md;
       line-height: 1.5em;
       margin: 0 0 utilities.$space-lg 0;
     }
