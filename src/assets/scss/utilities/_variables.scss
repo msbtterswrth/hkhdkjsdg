@@ -89,7 +89,7 @@ $tertiary-lt: $tan-lt;
 $tertiary-dk: $tan-dk;
 
 /*FONTS*/
-$font-script: "Merriweather", serif;
+$font-script: 'Georgia', 'Cambria', 'Times New Roman', 'Times', serif;
 $font-display: 'Roboto Condensed', sans-serif;
 $font-sans: 'Roboto', sans-serif;
 $font-xxs: 14px;
@@ -123,6 +123,7 @@ $space-3xl: 150px;
 $section-themes: (
   "sage": (bg: $sage,
     text: #fff,
+    text-secondary: $sage-dk,
     blockquote-text: $sage-dk,
     link: $sage-dk,
     link-hover: $sage-lt,
@@ -133,6 +134,7 @@ $section-themes: (
       text: #fff),
     light: (bg: $sage-lt,
       text: #000,
+      text-secondary: $sage-dk,
       blockquote-text: $sage-dk,
       link: $sage-dk,
       link-hover: $sage,
@@ -140,6 +142,7 @@ $section-themes: (
       accent-secondary: $sage ),
     dark: (bg: $sage-dk,
       text: #fff,
+      text-secondary: $sage-lt,
       blockquote-text: $sage-lt,
       link: $gold,
       link-hover: $gold-lt,
@@ -148,6 +151,7 @@ $section-themes: (
 
   "navy": (bg: $navy,
     text: #fff,
+    text-secondary: $navy-lt,
     blockquote-text: $navy-lt,
     link: $gold,
     link-hover: $gold-lt,
@@ -158,12 +162,14 @@ $section-themes: (
       text: #fff),
     light: (bg: $navy-lt,
       text: #000,
+      text-secondary: $navy,
       blockquote-text: $navy,
       link: $navy,
       link-hover: $navy-dk,
       accent-primary: $navy,
       accent-secondary: $navy-dk, ),
     dark: (bg: $navy-dk,
+      text-secondary: $navy,
       blockquote-text: $navy-lt,
       link: $gold,
       link-hover: $gold-lt,
@@ -171,6 +177,7 @@ $section-themes: (
 
   "tan": (bg: $tan,
     text: #000,
+    text-secondary: $tan-dk,
     blockquote-text: #000,
     link: $tan-dk,
     link-hover: $tan-lt,
@@ -180,20 +187,49 @@ $section-themes: (
       hover: $tan-dk,
       text: #000),
     light: (bg: $tan-lt,
+      text-secondary: $tan-dk,
       link: $navy,
       link-hover: $navy-dk,
       accent-primary: #000,
       accent-secondary: $tan-dk ),
     dark: (bg: $tan-dk,
       text: #fff,
+      text-secondary: $tan-lt,
       blockquote-text: $tan-lt,
       link: $tan-lt,
       link-hover: $tan,
       accent-primary: $tan-lt,
       accent-secondary: $tan)),
 
+  "gold": (bg: $gold,
+    text: #000,
+    text-secondary: $gold-dk,
+    blockquote-text: #000,
+    link: $gold-dk,
+    link-hover: $gold-lt,
+    accent-primary: $gold-dk,
+    accent-secondary: $gold-lt,
+    button: (bg: $gold,
+      hover: $gold-dk,
+      text: #000),
+    light: (bg: $gold-lt,
+      text-secondary: $gold-dk,
+      link: $navy,
+      link-hover: $navy-dk,
+      accent-primary: #000,
+      accent-secondary: $gold ),
+    dark: (bg: $gold-dk,
+      text: #fff,
+      text-secondary: $gold-lt,
+      blockquote-text: $gold-lt,
+      link: $gold-lt,
+      link-hover: $gold,
+      accent-primary: $gold-lt,
+      accent-secondary: $gold)),
+
   "black": (bg: #000,
     text: #fff,
+    text-secondary: $gray-lt,
 
     button: (bg: #000,
       hover: $gray-dk,
@@ -201,12 +237,19 @@ $section-themes: (
 
   "white": (bg: #fff,
     text: #000,
+    text-secondary: $gray-dk,
+    accent-primary: $gold,
+    accent-secondary: $blue,
+    link: $blue,
+    link-hover: $blue-dk,
 
     button: (bg: #fff,
       hover: $gray-lt,
       text: #000)),
 
-  "gray": (bg: $gray-xl )
+  "gray": (bg: $gray-xl,
+    text: #000,
+    text-secondary: $gray-dk, )
 );
 
 $heading-themes: (

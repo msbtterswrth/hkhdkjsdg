@@ -1,0 +1,95 @@
+@use '../utilities' as utilities;
+@use 'sass:map';
+
+.base__image-card {
+  border-radius: utilities.$border-radius;
+  box-shadow: rgba(#000, .2) 0px 0px 10px;
+  position: relative;
+  overflow: hidden;
+
+  &:hover,
+  &:focus {
+    box-shadow: rgba(#000, .4) 0px 0px 15px;
+  }
+
+  .image {
+    aspect-ratio: 8/4.5;
+    background: utilities.$navy;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    width: 100%;
+
+    img {
+      width: 100%
+    }
+
+    .tag {
+      position: absolute;
+      top: utilities.$space-md;
+      left: utilities.$space-md;
+    }
+  }
+
+  .inner {
+    padding: utilities.$space-lg;
+
+    .heading,
+    h3 {
+      font-family: utilities.$font-sans;
+      font-size: utilities.$font-md;
+      font-weight: 600;
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  @each $name, $theme in utilities.$section-themes {
+    &.#{$name} {
+      @include utilities.image-card-theme($theme);
+
+      $light: map.get($theme, light);
+
+      @if $light {
+        &.light {
+          @include utilities.image-card-theme($light);
+        }
+      }
+
+      $dark: map.get($theme, dark);
+
+      @if $dark {
+        &.dark {
+          @include utilities.image-card-theme($dark);
+        }
+      }
+    }
+  }
+}
+
+.base__layout {
+  &.one {
+    .text-card {
+      .inner {
+        padding: 90px 30px;
+        text-align: center;
+
+        @include utilities.breakpoint(sm-max) {
+          padding: 30px;
+        }
+
+        .blurb {
+          @include utilities.breakpoint(lg) {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

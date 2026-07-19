@@ -1,7 +1,5 @@
 @use "sass:color";
-@use '../utilities' as utilities; 
-
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+@use '../utilities' as utilities;
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Roboto+Condensed:wght@700&family=Roboto:wght@100;500&display=swap');
 
 body {
@@ -111,13 +109,33 @@ body {
 
   span {
     &.eyebrow {
-      display:block;
+      align-items: center;
+      display: flex;
       font-family: utilities.$font-script;
       font-size: utilities.$font-xs;
       letter-spacing: 1px;
       margin-bottom: utilities.$space-sm;
       text-transform: uppercase;
+
+      &::before {
+        background: #000;
+        height: 2px;
+        margin-right: utilities.$space-xs;
+        width: 30px;
+      }
     }
+
+    &.tag {
+      background: utilities.$navy-100;
+      border-radius: utilities.$border-radius-lg;
+      display: inline-block;
+      font-size: utilities.$font-xxs;
+      letter-spacing: 1px;
+      margin-bottom: utilities.$space-sm;
+      padding: utilities.$space-xs utilities.$space-md;
+      text-transform: uppercase;
+    }
+
     &.primary {
       color: utilities.$primary !important
     }
@@ -183,7 +201,7 @@ body {
       list-style-type: none;
       padding: 0;
 
-      > li {
+      >li {
         position: relative;
         padding-left: utilities.$space-md;
 
@@ -200,7 +218,7 @@ body {
           list-style-type: none;
           padding: 0;
 
-          > li {
+          >li {
             position: relative;
             padding-left: utilities.$space-md;
 

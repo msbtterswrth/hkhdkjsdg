@@ -87,6 +87,102 @@
   animation: #{$str};
 }
 
+//BREAKPOINTS
+@mixin breakpoint($point) {
+
+  @if ($point ==xl) {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
+
+  @if ($point ==lg) {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==md) {
+    @media (min-width: 992px) and (max-width: 1199px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==md-min) {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==sm-max) {
+    @media (max-width: 991px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==sm) {
+    @media (min-width: 768px) and (max-width: 991px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==xs) {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==xxs) {
+    @media (max-width: 640px) and (min-width: 481px) {
+      @content;
+    }
+  }
+
+  @else if ($point ==xxxs) {
+    @media (max-width: 480px) {
+      @content;
+    }
+  }
+}
+
+//IMAGES
+@mixin img-gradient {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+@mixin grayscale($value) {
+  -webkit-filter: #{"grayscale(#{$value})"};
+ -moz-filter: #{"grayscale(#{$value})"};
+ filter: #{"grayscale(#{$value})"};
+
+}
+
+//FORMS
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
 //BUTTONS & LINKS
 @mixin button($button-theme,
   $outline: false,
@@ -208,7 +304,7 @@
 
 @mixin arrow-link($background) {
   color: $background;
-  font-family: variables.$font-script;
+  font-family: variables.$font-display;
   font-size: variables.$font-xxs;
   font-weight: 600;
   letter-spacing: 1px;
@@ -220,11 +316,11 @@
 
   &::after {
     content: "\e921";
-    font-family: icomoon;
+    font-family: icons;
     line-height: 1;
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 40%;
     transition: right .3s linear;
     transform: translate(0%, -50%);
 
@@ -288,106 +384,10 @@
   }
 }
 
-
-//BREAKPOINTS
-@mixin breakpoint($point) {
-
-  @if ($point ==xl) {
-    @media (min-width: 1400px) {
-      @content;
-    }
-  }
-
-  @if ($point ==lg) {
-    @media (min-width: 1200px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==md) {
-    @media (min-width: 992px) and (max-width: 1199px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==md-min) {
-    @media (min-width: 992px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==sm-max) {
-    @media (max-width: 991px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==sm) {
-    @media (min-width: 768px) and (max-width: 991px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==xs) {
-    @media (max-width: 767px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==xxs) {
-    @media (max-width: 640px) and (min-width: 481px) {
-      @content;
-    }
-  }
-
-  @else if ($point ==xxxs) {
-    @media (max-width: 480px) {
-      @content;
-    }
-  }
-}
-
-//IMAGES
-@mixin img-gradient {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
-  content: "";
-  height: 100%;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-@mixin grayscale($value) {
-  -webkit-filter: #{"grayscale(#{$value})"};
- -moz-filter: #{"grayscale(#{$value})"};
- filter: #{"grayscale(#{$value})"};
-
-}
-
-//FORMS
-@mixin placeholder {
-  &::-webkit-input-placeholder {
-    @content;
-  }
-
-  &:-moz-placeholder {
-    @content;
-  }
-
-  &::-moz-placeholder {
-    @content;
-  }
-
-  &:-ms-input-placeholder {
-    @content;
-  }
-}
-
 @mixin section-theme($config) {
   $bg: map.get($config, bg);
   $text: map.get($config, text);
+  $text-secondary: map.get($config, text-secondary);
   $blockquote-text: map.get($config, blockquote-text);
   $link: map.get($config, link);
   $link-hover: map.get($config, link-hover);
@@ -416,7 +416,11 @@
     }
 
     .eyebrow {
-      color: $accent-secondary;
+      color: $text-secondary;
+
+      &::before {
+        background: $accent-secondary
+      }
     }
 
     .heading::after {
@@ -447,7 +451,11 @@
         }
 
         .eyebrow {
-          color: map.get($light, accent-secondary)
+          color: map.get($light, text-secondary);
+
+          &::before {
+            background: map.get($light, accent-secondary)
+          }
         }
 
         .heading::after {
@@ -479,7 +487,11 @@
         }
 
         .eyebrow {
-          color: map.get($dark, accent-secondary)
+          color: map.get($dark, text-secondary);
+
+          &::before {
+            background: map.get($dark, accent-secondary)
+          }
         }
 
         .heading::after {
@@ -491,6 +503,45 @@
 }
 
 @mixin card-theme($theme) {
+  .inner {
+    background: map.get($theme, bg);
+
+    @if map.get($theme, text) {
+      color: map.get($theme, text);
+    }
+
+    @include link-theme($theme);
+
+
+    @if map.get($theme, accent-primary) {
+
+      h2,
+      h3,
+      .heading {
+        color: map.get($theme, accent-primary);
+
+        strong {
+          color: map.get($theme, accent-secondary);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  &.has-icon {
+    .icon {
+
+      svg,
+      svg>* {
+        stroke: map.get($theme, accent-primary);
+      }
+    }
+  }
+}
+
+@mixin image-card-theme($theme) {
+  background: map.get($theme, bg);
+
   .inner {
     background: map.get($theme, bg);
 

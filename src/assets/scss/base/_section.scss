@@ -41,7 +41,15 @@
   }
 
   .heading {
+    display:inline-block;
     margin: 0 0 utilities.$space-lg 0;
+  }
+
+  .view-all {
+    @include utilities.arrow-link(utilities.$primary);
+    float: right;
+    margin-top: 14px;
+    text-align: right;
   }
 
   .paragraph {

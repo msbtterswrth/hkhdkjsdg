@@ -1,5 +1,5 @@
 @use '../utilities' as utilities;
-
+@use "sass:map";
 
 .hero-wrap {
   margin-bottom: utilities.$space-xl;
@@ -55,7 +55,7 @@
         }
       }
 
-      + .blurb {
+      +.blurb {
         bottom: calc(utilities.$space-lg * 2);
         display: inline;
         position: absolute;
@@ -129,6 +129,7 @@
 
   .blurb {
     max-width: 800px;
+
     h1 {
       color: #fff;
       font-family: utilities.$font-display;
@@ -144,9 +145,16 @@
         margin: 0;
       }
     }
+
+    .eyebrow {
+
+      &::before {
+        background: utilities.$blue;
+      }
+    }
   }
 
-  + .crumbs {
+  +.crumbs {
     color: utilities.$gray-dk;
     margin: 20px 0 30px;
 
