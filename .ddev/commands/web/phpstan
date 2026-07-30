@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Description: Run PHPStan static analysis with Drupal extension
+## Usage: phpstan [path...] [phpstan options]
+## Example: "ddev phpstan" or "ddev phpstan web/modules/custom/mymodule"
+
+# Uses phpstan.neon at the repository root (paths default to custom code).
+./vendor/bin/phpstan analyse -c phpstan.neon "$@"

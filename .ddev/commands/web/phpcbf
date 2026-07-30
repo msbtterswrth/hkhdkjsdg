@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Description: Auto-fix PHP_CodeSniffer coding standards violations
+## Usage: phpcbf [path...] [phpcbf options]
+## Example: "ddev phpcbf" or "ddev phpcbf web/modules/custom/mymodule"
+
+# With no arguments, phpcbf reads phpcs.xml.dist for the default paths and
+# standards. Any arguments passed through override the default paths.
+./vendor/bin/phpcbf "$@"

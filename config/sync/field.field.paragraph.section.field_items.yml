@@ -1,0 +1,104 @@
+uuid: 8066f28e-6043-4bb1-b46e-ed319fbde16f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_items
+    - paragraphs.paragraphs_type.accordions
+    - paragraphs.paragraphs_type.featured_media
+    - paragraphs.paragraphs_type.form
+    - paragraphs.paragraphs_type.from_library
+    - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.list
+    - paragraphs.paragraphs_type.media_embed
+    - paragraphs.paragraphs_type.rich_text
+    - paragraphs.paragraphs_type.section
+    - paragraphs.paragraphs_type.testimonials
+  module:
+    - entity_reference_revisions
+id: paragraph.section.field_items
+field_name: field_items
+entity_type: paragraph
+bundle: section
+label: Items
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      rich_text: rich_text
+      layout: layout
+      accordions: accordions
+      featured_media: featured_media
+      media_embed: media_embed
+      testimonials: testimonials
+      form: form
+      list: list
+      from_library: from_library
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: -30
+        enabled: false
+      accordions:
+        weight: -39
+        enabled: true
+      call_to_action:
+        weight: -23
+        enabled: false
+      featured_logos:
+        weight: -31
+        enabled: false
+      featured_media:
+        weight: -38
+        enabled: true
+      form:
+        weight: -34
+        enabled: true
+      from_library:
+        weight: -32
+        enabled: true
+      hero:
+        weight: -29
+        enabled: false
+      icon_list_item:
+        weight: -22
+        enabled: false
+      image_card:
+        weight: -28
+        enabled: false
+      image_gallery:
+        weight: -37
+        enabled: true
+      layout:
+        weight: -40
+        enabled: true
+      link_list:
+        weight: -27
+        enabled: false
+      list:
+        weight: -33
+        enabled: true
+      media_embed:
+        weight: -36
+        enabled: true
+      rich_text:
+        weight: -41
+        enabled: true
+      section:
+        weight: -26
+        enabled: false
+      testimonial:
+        weight: -25
+        enabled: false
+      testimonials:
+        weight: -35
+        enabled: true
+      text_card:
+        weight: -24
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,13 @@
+uuid: d2548366-5c2b-4ebc-ae95-dac6667756ae
+langcode: en
+status: true
+dependencies: {  }
+id: icon
+label: Icon
+description: 'Use to show an SVG icon from our icon library. '
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map: {  }

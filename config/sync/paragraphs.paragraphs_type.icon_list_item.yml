@@ -1,0 +1,15 @@
+uuid: 7e2b90f7-aea0-4b4a-a3e6-53efe4478058
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs_library
+third_party_settings:
+  paragraphs_library:
+    allow_library_conversion: true
+id: icon_list_item
+label: 'Icon List Item'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

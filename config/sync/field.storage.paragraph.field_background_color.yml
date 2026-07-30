@@ -1,0 +1,48 @@
+uuid: e882d1f3-7444-493f-80f7-ad1ce42bfaf7
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: navy
+      label: Navy
+    -
+      value: gold
+      label: Gold
+    -
+      value: blue
+      label: Blue
+    -
+      value: sage
+      label: Sage
+    -
+      value: purple
+      label: Purple
+    -
+      value: plum
+      label: Plum
+    -
+      value: white
+      label: White
+    -
+      value: gray
+      label: Gray
+    -
+      value: black
+      label: Black
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

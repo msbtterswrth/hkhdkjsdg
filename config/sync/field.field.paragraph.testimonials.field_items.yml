@@ -1,0 +1,79 @@
+uuid: c2c8d16a-6bac-41cf-9a8a-ecc922d3a043
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_items
+    - paragraphs.paragraphs_type.testimonial
+    - paragraphs.paragraphs_type.testimonials
+  module:
+    - entity_reference_revisions
+id: paragraph.testimonials.field_items
+field_name: field_items
+entity_type: paragraph
+bundle: testimonials
+label: Items
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      testimonial: testimonial
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 4
+        enabled: false
+      accordions:
+        weight: 5
+        enabled: false
+      featured_logos:
+        weight: 20
+        enabled: false
+      featured_media:
+        weight: 21
+        enabled: false
+      form:
+        weight: 22
+        enabled: false
+      from_library:
+        weight: 6
+        enabled: false
+      hero:
+        weight: 24
+        enabled: false
+      icon_card:
+        weight: 25
+        enabled: false
+      image_card:
+        weight: 26
+        enabled: false
+      layout:
+        weight: 27
+        enabled: false
+      link_list:
+        weight: 28
+        enabled: false
+      media_embed:
+        weight: 29
+        enabled: false
+      rich_text:
+        weight: 30
+        enabled: false
+      section:
+        weight: 31
+        enabled: false
+      testimonial:
+        weight: 32
+        enabled: true
+      testimonials:
+        weight: 33
+        enabled: false
+      text_card:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

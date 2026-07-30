@@ -1,0 +1,23 @@
+uuid: 828589a3-b43d-4820-9c5d-2493bc71a239
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_theme
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - options
+id: paragraph.testimonial.field_theme
+field_name: field_theme
+entity_type: paragraph
+bundle: testimonial
+label: Theme
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: primary
+default_value_callback: ''
+settings: {  }
+field_type: list_string

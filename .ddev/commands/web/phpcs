@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Description: Run PHP_CodeSniffer with Drupal coding standards
+## Usage: phpcs [path...] [phpcs options]
+## Example: "ddev phpcs" or "ddev phpcs web/modules/custom/mymodule"
+
+# With no arguments, phpcs reads phpcs.xml.dist for the default paths and
+# standards. Any arguments passed through override the default paths.
+./vendor/bin/phpcs "$@"

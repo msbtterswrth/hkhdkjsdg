@@ -1,0 +1,23 @@
+uuid: 75e4be9b-9a27-4ecd-b4c1-dbe670aa433b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_theme
+    - paragraphs.paragraphs_type.text_card
+  module:
+    - options
+id: paragraph.text_card.field_theme
+field_name: field_theme
+entity_type: paragraph
+bundle: text_card
+label: Theme
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: primary
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,19 @@
+uuid: 51082d27-46ad-47f3-80f7-9e3b9e3b2667
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_plain_text
+    - paragraphs.paragraphs_type.call_to_action
+id: paragraph.call_to_action.field_plain_text
+field_name: field_plain_text
+entity_type: paragraph
+bundle: call_to_action
+label: 'Plain Text'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

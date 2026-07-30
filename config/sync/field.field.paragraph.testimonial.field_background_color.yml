@@ -1,0 +1,21 @@
+uuid: cbd86a31-fe25-4e54-bc50-f0c2ee21a626
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - options
+id: paragraph.testimonial.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+bundle: testimonial
+label: 'Background Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

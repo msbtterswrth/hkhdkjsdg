@@ -1,0 +1,26 @@
+uuid: 04740fbd-678e-4987-82c2-4167dc730554
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.webform_default
+  module:
+    - file
+    - filter
+    - media
+    - search
+    - shortcut
+    - system
+_core:
+  default_config_hash: cFrlqjtkTfvY3RGccjJkPf1SGIfJ942IrxTLWAO4mgA
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access shortcuts'
+  - 'delete own files'
+  - 'search content'
+  - 'use text format webform_default'
+  - 'view media'

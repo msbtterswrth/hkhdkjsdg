@@ -1,0 +1,19 @@
+uuid: af9290df-8c11-4ce3-8828-b24b28432cb8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.icon_list_item
+id: paragraph.icon_list_item.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: icon_list_item
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

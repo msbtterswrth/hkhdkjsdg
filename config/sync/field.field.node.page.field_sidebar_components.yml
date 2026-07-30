@@ -1,0 +1,86 @@
+uuid: b5c5baf9-e1fb-4532-9598-8c5947a6102e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_sidebar_components
+    - node.type.page
+    - paragraphs.paragraphs_type.from_library
+    - paragraphs.paragraphs_type.image_card
+    - paragraphs.paragraphs_type.text_card
+  module:
+    - entity_reference_revisions
+id: node.page.field_sidebar_components
+field_name: field_sidebar_components
+entity_type: node
+bundle: page
+label: 'Sidebar Components'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      from_library: from_library
+      text_card: text_card
+      image_card: image_card
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: -33
+        enabled: false
+      accordions:
+        weight: -32
+        enabled: false
+      fact:
+        weight: -31
+        enabled: false
+      facts:
+        weight: -30
+        enabled: false
+      featured_logos:
+        weight: -29
+        enabled: false
+      featured_media:
+        weight: -28
+        enabled: false
+      form:
+        weight: -27
+        enabled: false
+      from_library:
+        weight: -37
+        enabled: true
+      icon_card:
+        weight: -35
+        enabled: true
+      image_card:
+        weight: -34
+        enabled: true
+      layout:
+        weight: -26
+        enabled: false
+      link_list:
+        weight: -25
+        enabled: false
+      media_embed:
+        weight: -24
+        enabled: false
+      section:
+        weight: -23
+        enabled: false
+      testimonial:
+        weight: -22
+        enabled: false
+      testimonials:
+        weight: -21
+        enabled: false
+      text_card:
+        weight: -36
+        enabled: true
+      wysiwyg:
+        weight: -20
+        enabled: false
+field_type: entity_reference_revisions
