@@ -1,0 +1,27 @@
+{{ attach_library('base/media-embed') }}
+{% set catch_cache = content|render %}
+{% if paragraph.field_heading_size.value %}
+	{% set heading = paragraph.field_heading_size.value %}
+	{% else%}
+	{% set heading = "h2" %}
+{% endif %}
+<div class="base__media-embed">
+	{% if content.field_title.0 %}
+		<{{heading}} class="heading">{{content.field_title.0}}</{{heading}}>
+	{% endif %}
+	{% if content.field_media['#items']|length == 1 %}
+		{{content.field_media}}
+	{% else %}
+		<div class="slider">
+			{{content.field_media}}
+		</div>
+		<div class="arrows">
+			<div class="prev-slide arrow">
+				<i class="icon-arrow-left"></i>
+			</div>
+			<div class="next-slide arrow">
+				<i class="icon-arrow-right"></i>
+			</div>
+		</div>
+	{% endif %}
+</div>

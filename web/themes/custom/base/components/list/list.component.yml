@@ -1,0 +1,15 @@
+name: List
+description: Displays a list of icon-backed items.
+group: Lists
+
+slots:
+  items:
+    title: Items
+    description: Rendered icon list items.
+
+props:
+  type: object
+  properties: {}
+
+libraryOverrides:
+  css: {}

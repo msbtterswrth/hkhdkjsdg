@@ -1,0 +1,18 @@
+{% set bg_class = background_color ? ('has-bg ' ~ background_color) : '' %}
+{% set theme_class = theme ? theme : '' %}
+{% set heading = heading_level|default('h2') %}
+
+<section class="section {{ bg_class }} {{ theme_class }}">
+  <div class="container">
+    {% if title or body %}
+      <div class="body-text">
+        {% if title %}
+          <{{ heading }} class="heading">{{ title }}</{{ heading }}>
+        {% endif %}
+        {{ body }}
+      </div>
+    {% endif %}
+
+    {% block items %}{% endblock %}
+  </div>
+</section>

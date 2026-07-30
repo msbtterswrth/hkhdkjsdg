@@ -1,0 +1,31 @@
+{% set heading = heading_level|default('h3') %}
+{% set bg = background_color ? (background_color ~ ' has-bg') : '' %}
+{% set pos = position|default('') %}
+
+<div class="base__featured-media {{ bg }} {{ pos }}">
+  <div class="inner">
+    <div class="img">
+      {% if link_url %}
+        <a href="{{ link_url }}">
+      {% endif %}
+
+      {{ media }}
+
+      {% if link_url %}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="blurb">
+      {% if title %}
+        <{{ heading }}>{{ title }}</{{ heading }}>
+      {% endif %}
+
+      {{ body }}
+
+      {% if link_title and link_url %}
+        <a href="{{ link_url }}" class="btn secondary">{{ link_title }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{% set heading = heading_level|default('h2') %}
+{% set slider = use_slider ? true : false %}
+
+<div class="base__testimonials">
+	{% if title %}
+		<{{heading}}>{{ title }}</{{heading}}>
+	{% endif %}
+
+	{% if body %}
+		<div class="body-text">{{ body }}</div>
+	{% endif %}
+
+	{% set inner %}
+	{% block content %}{% endblock %}
+	{% endset %}
+
+	{% if slider %}
+		<div class="slider" data-testimonials>
+			<div class="slider__viewport" data-slider-viewport>
+				<div class="slider__track" data-slider-track>
+					{{ inner }}
+				</div>
+			</div>
+
+			<div class="testimonial-dots" data-slider-dots></div>
+		</div>
+
+	{% else %}
+		<div class="testimonials-list">
+			{{ inner }}
+		</div>
+	{% endif %}
+</div>

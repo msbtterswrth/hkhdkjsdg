@@ -1,0 +1,9 @@
+{% set catch_cache = content|render %}
+
+{{ include('base:call-to-action', {
+  title: content.field_title.0,
+  body: content.field_plain_text.0,
+  image: content.field_image.0|default(),
+  link_url: paragraph.field_link.0.url,
+  link_title: paragraph.field_link.0.title,
+}, with_context = false) }}

@@ -1,0 +1,45 @@
+name: Accordion
+description: Collapsible accordion list.
+status: stable
+
+props:
+  type: object
+  properties:
+    heading_level:
+      type: string
+      description: Heading tag to use for the accordion group title (h2–h6).
+      default: "h2"
+
+    title:
+      type: string
+      description: Optional title displayed above the accordion items.
+
+    body:
+      type: string
+      description: Optional body text displayed under the title. (Pass rendered markup if needed.)
+
+    allow_multiple:
+      type: boolean
+      description: If true, multiple items may be open at once.
+      default: false
+
+    items:
+      type: array
+      description: Accordion items. If omitted, you can provide the "items" slot instead.
+      items:
+        type: object
+        required: [ title, content, id ]
+        properties:
+          id:
+            type: string
+          title:
+            type: string
+          content:
+            type: string
+          expanded:
+            type: boolean
+            default: false
+
+slots:
+  content:
+    description: Optional slot for pre-rendered accordion item markup.

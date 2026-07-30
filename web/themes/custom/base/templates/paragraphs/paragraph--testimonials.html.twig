@@ -1,0 +1,13 @@
+{% set catch_cache = content|render %}
+{% set use_slider = paragraph.field_use_slider.value ? true : false %}
+
+{% embed 'base:testimonials' with {
+  heading_level: paragraph.field_heading_size.value ?: 'h2',
+  title: content.field_title.0|default() ,
+  body: content.field_rich_text.0|default() ,
+  use_slider: use_slider
+} %}
+  {% block content %}
+    {{ content.field_items }}
+  {% endblock %}
+{% endembed %}

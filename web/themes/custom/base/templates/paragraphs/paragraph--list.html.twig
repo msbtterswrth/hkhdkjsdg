@@ -1,0 +1,7 @@
+{% set catch_cache = content|render %}
+
+{% embed 'base:list' %}
+  {% block items %}
+    {{ content.field_item }}
+  {% endblock %}
+{% endembed %}

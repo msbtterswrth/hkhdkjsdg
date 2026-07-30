@@ -1,0 +1,116 @@
+@use '../../assets/scss/utilities.scss' as utilities;
+@use "sass:map";
+
+.base__text-card {
+  height: 100%;
+
+  .inner {
+    border-radius: utilities.$border-radius;
+    height: 100%;
+    padding: utilities.$space-lg;
+
+    .heading,
+    h3 {
+      font-family: utilities.$font-sans;
+      font-size: utilities.$font-lg;
+      padding-bottom: utilities.$space-md;
+      font-weight: 600;
+    }
+
+    .icon {
+      margin: 0 auto;
+      position: relative;
+      text-align: left;
+      width: 100%;
+
+      svg,
+      svg>* {
+        height: 48px;
+        stroke: #000;
+      }
+
+      img {
+        width: 100%
+      }
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  @each $name, $theme in utilities.$section-themes {
+    &.#{$name} {
+      @include utilities.card-theme($theme);
+
+      $light: map.get($theme, light);
+      @if $light {
+        &.light {
+          @include utilities.card-theme($light);
+        }
+      }
+
+      $dark: map.get($theme, dark);
+      @if $dark {
+        &.dark {
+          @include utilities.card-theme($dark);
+        }
+      }
+    }
+  }
+
+  &.white {
+    .inner {
+      background: #fff;
+      color: #000;
+
+      .section.white & {
+        padding: 0;
+      }
+
+      .icon {
+
+        svg,
+        svg>* {
+          stroke: #000;
+        }
+      }
+
+      h2,
+      h3,
+      .heading {
+        color: #000;
+
+        strong {
+          color: utilities.$navy;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.base__layout {
+  &.one {
+    .text-card {
+      .inner {
+        padding: 90px 30px;
+        text-align: center;
+
+        @include utilities.breakpoint(sm-max) {
+          padding: 30px;
+        }
+
+        .blurb {
+          @include utilities.breakpoint(lg) {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+          }
+        }
+      }
+    }
+  }
+}

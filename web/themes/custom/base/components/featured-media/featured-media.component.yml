@@ -1,0 +1,41 @@
+name: Featured media
+description: Media + blurb block with optional link/button.
+status: stable
+
+props:
+  type: object
+  properties:
+    position:
+      type: string
+      description: Layout position class (e.g., left, right).
+      default: ""
+
+    background_color:
+      type: string
+      description: Background color class to apply (your existing field value).
+      default: ""
+
+    heading_level:
+      type: string
+      description: Heading tag to use for the title (h2–h6).
+      default: "h2"
+
+    title:
+      type: string
+      description: Optional title.
+
+    body:
+      type: string
+      description: Optional body markup (rendered rich text).
+
+    media:
+      type: ["string", "null"]
+      description: Rendered media markup.
+
+    link_url:
+      type: ["string", "null"]
+      description: Optional URL to wrap media and/or show button.
+
+    link_title:
+      type: ["string", "null"]
+      description: Optional button text.

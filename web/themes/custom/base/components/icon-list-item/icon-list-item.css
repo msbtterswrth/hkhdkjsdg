@@ -1,0 +1,2 @@
+.base__icon-list-item{background:#fff;display:grid;grid:auto/24px 1fr;gap:30px;align-items:center;margin-bottom:16px;padding:30px}.base__icon-list-item .title{font-family:Roboto,sans-serif;font-size:24px;padding-bottom:20px}.base__icon-list-item .icon{margin:0 auto;position:relative;text-align:left;width:100%}.base__icon-list-item .icon svg,.base__icon-list-item .icon svg>*{height:48px;stroke:#000}.base__icon-list-item .icon img{width:100%}
+/*# sourceMappingURL=icon-list-item.css.map */

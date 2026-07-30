@@ -1,0 +1,300 @@
+@use '../utilities' as utilities;
+
+
+.site-wrap {
+  .nav-open & {
+    overflow: hidden;
+  }
+
+  &::before {
+    background: #000;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    @include utilities.transition(opacity .3s linear .1s);
+
+    .nav-open &,
+    .search-open & {
+      opacity: .4;
+      z-index: 3;
+
+      .utility {
+        z-index: 1;
+      }
+    }
+  }
+
+  .toggles {
+    display: none;
+
+    @include utilities.breakpoint(sm-max) {
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+  .toggles,
+  .nav {
+    .search-toggle {
+      box-shadow: none;
+      color: utilities.$secondary;
+      cursor: pointer;
+      font-size: utilities.$font-md;
+      line-height: 1.2em;
+      margin-left: 15px;
+      @include utilities.transition(color .3s linear);
+
+      @include utilities.breakpoint(sm-max) {
+        font-size: 40px;
+        margin-left: 0;
+      }
+
+      .search-open & {
+        .icon-search {
+          &::before {
+            content: "\e912";
+          }
+        }
+      }
+
+      &:hover,
+      &:focus {
+        color: utilities.$secondary-lt;
+      }
+    }
+
+    .nav-toggle {
+      box-shadow: none;
+      height: 40px;
+      margin: 2px 0 0 15px;
+      padding: 10px 5px;
+      position: relative;
+      width: 40px;
+
+
+      span {
+        background: #fff;
+        border-radius: 3px;
+        display: block;
+        width: 30px;
+        height: 2px;
+        transform-origin: center;
+        @include utilities.transition(margin .3s utilities.$cubic, transform .3s utilities.$cubic, background .3s linear);
+
+        +span {
+          margin-top: 7px;
+        }
+
+        .nav-open & {
+          position: absolute;
+          left: 6px;
+          top: 18px;
+
+          &:nth-of-type(1) {
+            margin-bottom: -4px;
+            margin-top: 0;
+            transform: rotate(45deg);
+          }
+
+
+          &:nth-of-type(2) {
+            margin-top: 0;
+            transform: rotate(-45deg);
+          }
+
+          &:nth-of-type(3) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .header {
+    // box-shadow: 0 0 5px 5px rgba(#000, .2);
+    background: utilities.$primary-xdk;
+    color: #fff;
+    padding: utilities.$space-md 0;
+    position: relative;
+    width: 100%;
+    z-index: 9;
+
+    .nav-open &,
+    .search-open & {
+      @include utilities.breakpoint(sm-max) {
+        background: utilities.$navy-800 !important;
+      }
+    }
+
+    .inner {
+      align-items: center;
+      display: grid;
+      gap: utilities.$space-lg;
+      grid: auto / 1fr 4fr;
+
+      @include utilities.breakpoint(sm-max) {
+        grid: auto / 1fr 1fr;
+      }
+    }
+
+    .nav-wrapper {
+      align-items: center;
+      display: flex;
+      gap: utilities.$space-md;
+      justify-content: end;
+
+      @include utilities.breakpoint(sm-max) {
+        margin-top: utilities.$space-sm;
+      }
+    }
+
+    .site-branding {
+      a {
+        box-shadow: none;
+        border: none;
+        display: inline-block;
+        outline: none;
+      }
+
+      img {
+        height: 110px;
+        @include utilities.transition(max-width .2s linear);
+
+        @include utilities.breakpoint(sm-max) {
+          height: 90px;
+        }
+      }
+    }
+
+    .scroll & {
+      // left: 0;
+      // position: fixed;
+      // top: 0;
+      // z-index: 9;
+
+      .site-branding {
+        img {
+          max-width: 250px;
+        }
+      }
+
+      .nav {
+        @include utilities.breakpoint(lg) {
+          gap: utilities.$space-lg;
+        }
+      }
+
+      a {
+        font-size: utilities.$font-xxs !important;
+      }
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: utilities.$space-md;
+      justify-content: flex-end;
+
+      @include utilities.breakpoint(sm-max) {
+        background: utilities.$navy-800;
+        display: block;
+        max-height: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        text-align: left;
+        top: calc(100% + 25px);
+        width: 0;
+        z-index: 9;
+        @include utilities.transition(width .3s utilities.$cubic);
+      }
+
+      &::before,
+      &::after {
+        display: none;
+      }
+
+      .nav-open & {
+        @include utilities.breakpoint(sm-max) {
+          padding: 0 utilities.$space-md;
+          top: 100%;
+          width: 100vw;
+        }
+      }
+    }
+
+    .menu {
+      align-items: center;
+      display: flex;
+      gap: utilities.$space-sm;
+      justify-content: end;
+      list-style-type: none;
+      margin: 0;
+      order: 2;
+      padding: 0;
+      text-align: right;
+
+      @include utilities.breakpoint(sm-max) {
+        display: block;
+        margin: utilities.$space-xl 0;
+        text-align: left;
+      }
+
+      li {
+        margin: 0;
+
+        @include utilities.breakpoint(sm-max) {
+          border-bottom: 1px solid utilities.$secondary;
+          display: block;
+          padding-bottom: utilities.$space-md;
+          margin: 0 0 utilities.$space-md 0;
+
+          &:last-of-type {
+            border-bottom: none;
+          }
+        }
+
+        a {
+          &.btn {
+            margin: 0 0 0 utilities.$space-lg;
+
+            @include utilities.breakpoint(sm-max) {
+              margin: 0;
+            }
+          }
+
+          &:not(.btn) {
+            color: #fff;
+            font-family: utilities.$font-display;
+            font-size: utilities.$font-sm;
+            font-weight: 600;
+            position: relative;
+            text-decoration: none;
+            @include utilities.underline(utilities.$secondary);
+
+            @include utilities.breakpoint(sm-max) {
+              color: #fff;
+              font-size: utilities.$font-xs;
+              text-decoration: none;
+            }
+
+            &:focus,
+            &.is-active {
+              color: utilities.$secondary;
+            }
+
+            &::after {
+              display: none
+            }
+          }
+        }
+      }
+    }
+  }
+}

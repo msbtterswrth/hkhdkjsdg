@@ -1,0 +1,10 @@
+{% set catch_cache = content|render %}
+{% set heading = paragraph.field_heading_size.value ? paragraph.field_heading_size.value : 'h2' %}
+
+{{ include('base:accordion', {
+  title: content.field_title.0 ? content.field_title.0|render|striptags|trim : "",
+  body: content.field_rich_text.0 ? content.field_rich_text : "",
+  heading_level: heading,
+  allow_multiple: false,
+  items: sdc_props.items|default([])
+}, with_context = false) }}

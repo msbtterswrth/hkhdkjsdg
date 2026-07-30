@@ -1,0 +1,70 @@
+@use '../utilities' as utilities;
+
+.section {
+  color: #000;
+
+  &.has-bg {
+    padding: utilities.$space-xl;
+
+    @include utilities.breakpoint(xs) {
+      padding: utilities.$space-lg 0;
+    }
+  }
+
+  // Generate all theme variants
+  @each $name, $config in utilities.$section-themes {
+    &.#{$name} {
+      @include utilities.section-theme($config);
+    }
+  }
+
+  &.white {
+    background: #fff;
+    padding: utilities.$space-xl utilities.$space-md;
+
+    @include utilities.breakpoint(xs) {
+      padding: utilities.$space-lg 0;
+    }
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .body-text {
+    margin: 0 0 utilities.$space-xl;
+    max-width: 65rem;
+
+    &:last-child {
+      margin: 0 auto;
+    }
+  }
+
+  .heading {
+    display: inline-block;
+    margin: 0 0 utilities.$space-lg 0;
+  }
+
+  .view-all {
+    @include utilities.arrow-link(utilities.$primary);
+    float: right;
+    margin-top: 14px;
+    text-align: right;
+
+    @include utilities.breakpoint(sm-max) {
+      display: inline-block;
+      float: none;
+      margin-bottom: utilities.$space-md;
+    }
+  }
+
+  .paragraph {
+    +.paragraph--type--wysiwyg {
+      margin-top: utilities.$space-xl;
+    }
+  }
+}
+
+.bottom-sections {
+  margin-top: 50px;
+}

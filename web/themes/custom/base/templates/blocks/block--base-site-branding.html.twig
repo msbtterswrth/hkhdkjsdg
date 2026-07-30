@@ -1,0 +1,33 @@
+{#
+    /**
+     * @file
+     * Default theme implementation for a branding block.
+     *
+     * Each branding element variable (logo, name, slogan) is only available if
+     * enabled in the block configuration.
+     *
+     * Available variables:
+     * - site_logo: Logo for site as defined in Appearance or theme settings.
+     * - site_name: Name for site as defined in Site information settings.
+     * - site_slogan: Slogan for site as defined in Site information settings.
+     *
+     * @ingroup themeable
+     */
+    #}
+<div class="site-branding">
+	{% block content %}
+		{% if site_name %}
+			<a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a>
+		{% endif %}
+		{% if site_logo %}
+			<a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+				<?xml version="1.0" encoding="UTF-8"?>
+                <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 514.4 235.5">
+                    <path class="st0" d="M453.1,129.6c-6.9,0-11.6-4.1-11.6-9.9,0-6.5,5.2-10.5,15.9-12.7l12.5-2.4v10.3c0,8.7-6.9,14.7-16.8,14.7M435.3,155.4c16.3,0,30.3-7.1,35.9-18.3,0,5.8.4,10.8,1.5,15.7h41.7c-1.5-5.6-2.6-15.9-2.6-26.5v-39.1c0-30.8-17.2-44.5-54.6-44.5-33.3,0-54,14-55.9,38.9h42.4c.6-8.6,4.9-12.9,13.3-12.9,7.3,0,11.4,3.9,11.4,12v4.7l-29.2,4.4c-15.7,2.4-26,6-32.5,11.6-6,5.2-8.8,12.3-8.8,21.9,0,19.2,15,32.1,37.4,32.1M312.9,152.8h47.7l36.8-107.5h-44.3l-13.7,58.5c-1.5,6.2-1.7,9.7-2.4,14.6h-.4c-.6-4.9-.9-8.4-2.4-14.6l-13.8-58.5h-44.3l36.8,107.5ZM212.2,129.6c-6.9,0-11.6-4.1-11.6-9.9,0-6.5,5.2-10.5,15.9-12.7l12.5-2.4v10.3c0,8.7-6.9,14.7-16.8,14.7M194.4,155.4c16.3,0,30.3-7.1,35.9-18.3,0,5.8.4,10.8,1.5,15.7h41.7c-1.5-5.6-2.6-15.9-2.6-26.5v-39.1c0-30.8-17.2-44.5-54.6-44.5-33.3,0-54,14-55.9,38.9h42.4c.6-8.6,4.9-12.9,13.3-12.9,7.3,0,11.4,3.9,11.4,12v4.7l-29.3,4.3c-15.7,2.4-26,6-32.5,11.6-6,5.2-8.8,12.3-8.8,21.9.1,19.3,15.1,32.2,37.5,32.2M0,152.8h41.5V59.5h.4c1.9,4.9,5.6,11.8,8.8,18.3l43,75.1h46.5V.1h-41.5v93.5h-.4c-1.9-5.2-6.2-14-9.2-19.8L48.7,0H.1l-.1,152.8h0Z"/>
+                    <rect class="st0" y="194.1" width="511.2" height="41.4"/>
+                </svg>
+			</a>
+		{% endif %}
+		{{ site_slogan }}
+	{% endblock %}
+</div>

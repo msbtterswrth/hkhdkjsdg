@@ -1,0 +1,10 @@
+{% set catch_cache = content|render %}
+
+{{ include('base:testimonial', {
+  background_color: paragraph.field_background_color.value|default(),
+  theme: paragraph.field_theme.value|default(),
+  image: content.field_image.0|default(),
+  quote: content.field_plain_text.0|default() ,
+  attribution: content.field_attribution.0|default() ,
+  title: content.field_title.0|default() 
+}, with_context = false) }}

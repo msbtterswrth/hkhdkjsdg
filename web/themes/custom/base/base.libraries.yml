@@ -1,0 +1,92 @@
+global:
+  version: VERSION
+  css:
+    theme:
+      public/css/style.css: {}
+  js:
+    assets/js/script.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/drupal.debounce
+    - core/jquery
+    - core/once
+    - base/copy-clipboard
+    - base/enquire
+enquire:
+  js:
+    "//cdnjs.cloudflare.com/ajax/libs/enquire.js/2.1.2/enquire.min.js":
+      { type: external, minified: true }
+slick:
+  js:
+    "//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js":
+      { type: external, minified: true }
+  css:
+    theme:
+      "//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css": {}
+      "//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css":
+        {}
+  dependencies:
+    - core/jquery
+alert:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/alert.css: {}
+  js:
+    public/js/components/alerts.js: {}
+  dependencies:
+    - base/cookies
+facts:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/facts.css: {}
+  js:
+    public/js/components/facts.js: {}
+  dependencies:
+    - base/slick
+featured-logos:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/featured-logos.css: {}
+  js:
+    public/js/components/featured-logos.js: {}
+  dependencies:
+    - base/slick
+full-width-cta:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/full-width-cta.css: {}
+icon-cards:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/text-card/text-card.css: {}
+image-cards:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/image-card/image-card.css: {}
+link-list:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/link-list.css: {}
+  js:
+    public/js/components/link-list.js: {}
+media-embed:
+  version: 1.x
+  css:
+    theme:
+      public/css/components/media-embed/media-embed.css: {}
+  js:
+    public/js/components/media-embed.js: {}
+  dependencies:
+    - base/slick
+cookies:
+  js:
+    "//cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js":
+      { type: external, minified: true }

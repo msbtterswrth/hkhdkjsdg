@@ -1,0 +1,30 @@
+name: Section
+description: Section wrapper with optional intro content and slot for items.
+status: stable
+
+props:
+  type: object
+  properties:
+    background_color:
+      type: ["string", "null"]
+      default: null
+      description: Background utility/token class (e.g. "gray", "blue").
+    theme:
+      type: ["string", "null"]
+      default: null
+      description: Theme token/class from field_theme.
+    heading_level:
+      type: ["string", "null"]
+      default: "h2"
+      description: Heading tag to use (h2–h6).
+    title:
+      type: ["string", "null"]
+      default: null
+    body:
+      type: ["string", "null"]
+      default: null
+      description: Rendered rich text markup.
+
+slots:
+  items:
+    description: Rendered items markup (e.g., field_items).

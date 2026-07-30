@@ -1,0 +1,26 @@
+name: Testimonials
+description: Testimonials section with optional slider wrapper.
+status: stable
+
+props:
+  type: object
+  properties:
+    heading_level:
+      type: string
+      default: "h2"
+    title:
+      type: string
+    body:
+      type: string
+      description: Rendered rich text markup.
+    use_slider:
+      type: boolean
+      default: false
+
+slots:
+  content:
+    description: Rendered testimonial items (e.g., field_items).
+
+libraryOverrides:
+  dependencies:
+    - base/slick

@@ -1,0 +1,48 @@
+{#
+  Props:
+    - title (optional)
+    - body (optional, can be markup)
+    - heading_level (defaults to h2)
+    - allow_multiple (defaults false)
+    - items (optional array)
+  Slot:
+    - items (optional)
+#}
+
+{% set heading = heading_level|default('h2') %}
+{% set allow_multiple_attr = allow_multiple ? 'true' : 'false' %}
+
+<div class="base__accordions" data-accordion data-accordion-allow-multiple="{{ allow_multiple_attr }}">
+	{% if title %}
+		<{{heading}} class="base__accordions__title test">{{ title }}</{{heading}}>
+	{% endif %}
+
+	{% if body %}
+		<div class="body-text base__accordions__body">{{ body }}</div>
+	{% endif %}
+
+	{% if items is defined and items|length %}
+		{% for item in items %}
+			{% set item_id = item.id %}
+			{% set button_id = item_id ~ '--button' %}
+			{% set panel_id  = item_id ~ '--panel' %}
+			{% set expanded = item.expanded ? 'true' : 'false' %}
+
+			<div class="accordion-item" data-accordion-item>
+				<h4 class="accordion-title{{ item.expanded ? ' open' : '' }}" id="{{ button_id }}" aria-controls="{{ panel_id }}" aria-expanded="{{ expanded }}" data-accordion-trigger>
+					{{ item.title }}
+				</h4>
+
+				<div id="{{ panel_id }}" class="accordion-panel" role="region" aria-labelledby="{{ button_id }}" data-accordion-panel>
+					<div class="accordion-panel-content">
+						{{ item.content }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		{% block content %}
+			{# Slot fallback: lets you pass rendered field_items during migration #}
+		{% endblock %}
+	{% endif %}
+</div>

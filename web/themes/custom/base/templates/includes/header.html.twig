@@ -1,0 +1,25 @@
+{% if page.drawer %}
+	<section class="drawer" role="complementary" aria-label="Site Search">{{ page.drawer }}</section>
+{% endif %}
+<header class="header">
+	<div class="container">
+		<div class="inner">
+			<div class="branding">{{ page.header }}</div>
+			<div class="navigation">
+				<div class="nav-wrapper">
+					<div class="nav">
+						<div class="menu">{{ page.navigation }}
+						</div>
+					</div>
+					<div class="toggles">
+						<div class="nav-toggle" aria-label="press enter to open the menu" tabindex="0">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

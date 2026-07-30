@@ -1,0 +1,22 @@
+{% set bg = background_color ? (background_color ~ ' has-bg') : '' %}
+{% set theme_class = theme ? theme : '' %}
+{% set icon_class = icon.0 ? 'has-icon' : '' %}
+{% set heading = heading_level|default('h3') %}
+
+<div class="base__text-card {{ bg }} {{ theme_class }} {{ icon_class }}">
+  <div class="inner">
+    {% if icon %}
+      <div class="icon">
+        {{ icon }}
+      </div>
+    {% endif %}
+
+    {% if title %}
+      <{{ heading }} class="heading">{{ title }}</{{ heading }}>
+    {% endif %}
+
+    <div class="blurb">
+      {{ body }}
+    </div>
+  </div>
+</div>

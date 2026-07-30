@@ -1,0 +1,13 @@
+{% set catch_cache = content|render %}
+
+{% embed 'base:section' with {
+  background_color: paragraph.field_background_color.value|default(),
+  theme: paragraph.field_theme.value|default(),
+  heading_level: paragraph.field_heading_size.value ?: 'h2',
+  title: content.field_title.0|default(),
+  body: content.field_rich_text.0|default()
+} %}
+  {% block items %}
+    {{ content.field_items }}
+  {% endblock %}
+{% endembed %}

@@ -1,0 +1,25 @@
+name: Testimonial
+description: Single testimonial card.
+status: stable
+
+props:
+  type: object
+  properties:
+    background_color:
+      type: ["string", "null"]
+      default: null
+      description: Background utility/token class (e.g. "gray", "blue").
+    theme:
+      type: ["string", "null"]
+      default: null
+      description: Theme token/class from field_theme.
+    image:
+      type: ["string", "null"]
+      description: Rendered image markup.
+    quote:
+      type: string
+      description: Plain text or rendered markup for the testimonial blurb.
+    attribution:
+      type: string
+    title:
+      type: string

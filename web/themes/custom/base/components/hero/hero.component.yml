@@ -1,0 +1,30 @@
+name: Hero
+description: Configurable hero banner for pages. 
+status: stable
+
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      description: Title of the page.
+
+    blurb:
+      type: string
+      description: Optional blurb displayed under the title. (Pass rendered markup if needed.)
+
+    media:
+      type: ["string", "null"]
+      description: Rendered media markup.
+
+    links:
+      type: ["string", "null"]
+      description: Optional link(s) for button(s).
+
+    theme: 
+      type: string
+      description: Optional choice of theme. 
+
+    background_color:
+      type: string 
+      description: Optional choice of background color.

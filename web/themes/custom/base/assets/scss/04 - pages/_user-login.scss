@@ -1,0 +1,30 @@
+@import "../utilities.scss";
+
+.site-wrap {
+  .user-login-form, .user-pass {
+    border: $primary 1px solid;
+    border-radius: $border-radius;
+    margin: 0 auto;
+    min-width: 300px;
+    padding: $space-lg;
+    width: 33vw;
+
+    label {
+      font-size: $font-md;
+      margin-bottom: $space-xs;
+    }
+
+    .description {
+      color: $secondary-lt;
+      font-size: 12px;
+      margin-top: $space-xs;
+    }
+    .form-item {
+      padding: 0;
+    }
+
+    .form-submit {
+      @extend .btn, .primary;
+    }
+  }
+}

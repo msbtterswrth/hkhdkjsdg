@@ -1,0 +1,9 @@
+{% set catch_cache = content|render %}
+
+{{ include('base:image-gallery', {
+  title: content.field_title.0 ? content.field_title.0|render|striptags|trim : null,
+  layout: paragraph.field_image_gallery_layout.value,
+  background_color: paragraph.field_background_color.value,
+  images: content.field_image_gallery_images,
+  group_alt_text: content.field_group_alt_text.0 ? content.field_group_alt_text.0|render|striptags|trim : null,
+}, with_context = false) }}

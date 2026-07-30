@@ -1,0 +1,30 @@
+name: Layout
+description: Layout wrapper with optional intro and a grid of items.
+status: stable
+
+props:
+  type: object
+  properties:
+    background_color:
+      type: ["string", "null"]
+      default: null
+    heading_level:
+      type: ["string", "null"]
+      default: "h2"
+    title:
+      type: ["string", "null"]
+      default: null
+    body:
+      type: ["string", "null"]
+      description: Rendered rich text markup.
+      default: null
+    layout:
+      type: ["string", "null"]
+      default: null
+    gutter:
+      type: ["string", "null"]
+      default: null
+
+slots:
+  items:
+    description: Rendered grid items markup (e.g., field_items).

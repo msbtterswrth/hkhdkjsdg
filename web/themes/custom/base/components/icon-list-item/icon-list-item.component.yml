@@ -1,0 +1,17 @@
+name: Icon list item
+description: Individual item for the Icon list component.
+group: Lists
+
+props:
+  type: object
+  properties:
+    title:
+      type:
+        - "string"
+        - "null"
+      description: List item title.
+      default: ""
+
+    icon:
+      type: ["string", "null"]
+      description: Rendered icon markup.

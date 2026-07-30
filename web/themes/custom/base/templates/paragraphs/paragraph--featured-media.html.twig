@@ -1,0 +1,12 @@
+{% set catch_cache = content|render %}
+
+{{ include('base:featured-media', {
+  position: paragraph.field_position.value,
+  background_color: paragraph.field_background_color.value,
+  heading_level: paragraph.field_heading_size.value ?: 'h3',
+  title: content.field_title.0 ? content.field_title.0|render|striptags|trim : null,
+  body: content.field_rich_text,
+  media: content.field_media,
+  link_url: paragraph.field_link.0 ? paragraph.field_link.0.url : null,
+  link_title: paragraph.field_link.0 ? paragraph.field_link.0.title : null
+}, with_context = false) }}

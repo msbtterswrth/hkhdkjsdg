@@ -1,0 +1,10 @@
+{% set catch_cache = content|render %}
+
+{{ include('base:text-card', {
+  background_color: paragraph.field_background_color.value ?: '',
+  theme: paragraph.field_theme.value ?: '',
+  heading_level: paragraph.field_heading_size.value ?: 'h3',
+  title: content.field_title.0 ? content.field_title.0|render|striptags|trim : "",
+  body: content.field_rich_text,
+  icon: content.field_icon
+}, with_context = false) }}

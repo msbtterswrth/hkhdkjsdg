@@ -1,0 +1,29 @@
+{% set bg = background_color ? (background_color ~ ' has-bg') : '' %}
+{% set theme_class = theme ? theme : '' %}
+{% set has_media = media.0 ? 'has-media' : 'no-media' %}
+{% set media_type = media.0['#media'] ? media.0['#media'].bundle() : null %}
+{% if content.field_rich_text[0] and content.field_title[0] is empty %}
+	{% set text = ' has-text' %}
+{% endif %}
+
+<div class="base__hero {{has_media}} {{ bg }} {{ theme_class }} {{ text }}">
+	<div class="video">
+		{{ media }}
+	</div>
+	{% if media_type != 'remote_video' %}
+		<div class="img">{{ media }}</div>
+	{% endif %}
+	<div class="blurb">
+		<div class="container">
+			<div class="inner">
+				<h1>{{ title }}</h1>
+				{% if blurb %}
+					<p class="blurb">{{ blurb }}</p>
+				{% endif %}
+				{% if links %}
+					<div class="links">{{ links }}</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>

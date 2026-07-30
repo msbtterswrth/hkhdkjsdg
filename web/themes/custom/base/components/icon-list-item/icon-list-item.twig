@@ -1,0 +1,15 @@
+{{ attach_library('base/icon-list-item') }}
+
+<div{{ attributes.addClass('base__icon-list-item') }}>
+  {% if icon %}
+    <div class="icon">
+      {{ icon }}
+    </div>
+  {% endif %}
+
+  {% if title %}
+    <div class="title">
+      {{ title }}
+    </div>
+  {% endif %}
+</div>

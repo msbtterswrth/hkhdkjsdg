@@ -1,0 +1,6 @@
+{% set catch_cache = content|render %}
+
+{{ include('base:icon-list-item', {
+  title: content.field_title.0 ? content.field_title.0|render|striptags|trim : "",
+  icon: content.field_icon
+}, with_context = false) }}

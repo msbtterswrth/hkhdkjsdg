@@ -1,0 +1,21 @@
+{% set bg = background_color ? (background_color ~ ' has-bg') : '' %}
+{% set heading = heading_level|default('h2') %}
+
+<div class="base__layout {{ bg }}">
+  <div class="container">
+    <div class="item-grid">
+      <div class="body-text">
+        {% if title or body %}
+          {% if title %}
+            <{{ heading }} class="heading">{{ title }}</{{ heading }}>
+          {% endif %}
+          {{ body }}
+        {% endif %}
+      </div>
+
+      <div class="clearfix grid {{ gutter|default('') }} {{ layout|default('') }}">
+        {% block items %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</div>

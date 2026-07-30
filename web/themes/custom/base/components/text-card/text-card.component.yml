@@ -1,0 +1,36 @@
+name: Text card
+description: Simple text card with optional background color and configurable heading level.
+status: stable
+
+props:
+  type: object
+  properties:
+    background_color:
+      type: string
+      description: Background color token/class (from field value).
+      default: ""
+
+    theme:
+      type: string
+      description: Color theme (from field value).
+      default: ""
+
+    heading_level:
+      type: string
+      description: Heading tag to use (h2–h6).
+      default: "h3"
+
+    title:
+      type:
+        - "string"
+        - "null"
+      description: Card title.
+      default: ""
+
+    body:
+      type: string
+      description: Rendered body markup (rich text).
+
+    icon:
+      type: ["string", "null"]
+      description: Optional rendered icon/media markup.
