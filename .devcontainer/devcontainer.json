@@ -1,0 +1,29 @@
+{
+  "name": "DDEV Cloud Environment",
+  "image": "://microsoft.com",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y xdg-utils",
+  "postCreateCommand": "curl -fsSL https://ddev.com | bash && ddev config --auto",
+  "postStartCommand": "ddev start",
+  "forwardPorts": [8080, 8025],
+  "portsAttributes": {
+    "8080": {
+      "label": "DDEV Web Server",
+      "onAutoForward": "openPreview"
+    },
+    "8025": {
+      "label": "Mailpit",
+      "onAutoForward": "ignore"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ddev.ddev-vscode-plugin"
+      ]
+    }
+  }
+}
