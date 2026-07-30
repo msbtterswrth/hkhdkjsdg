@@ -14,6 +14,7 @@ module:
   config: 0
   contextual: 0
   crop: 0
+  ctools: 0
   current_page_crumb: 0
   datetime: 0
   dblog: 0
@@ -65,9 +66,9 @@ module:
   pathauto: 1
   views: 10
   paragraphs: 11
-  standard: 1000
+  minimal: 1000
 theme:
   claro: 0
   stark: 0
   base: 0
-profile: standard
+profile: minimal

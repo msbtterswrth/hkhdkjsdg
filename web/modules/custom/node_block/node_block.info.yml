@@ -2,4 +2,4 @@ name: 'Node Block'
 description: 'Adds node block to a project.'
 package: 'Node Block'
 type: module
-core_version_requirement: ^11
+core_version_requirement: ^10 || ^11

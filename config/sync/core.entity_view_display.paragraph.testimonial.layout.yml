@@ -52,4 +52,7 @@ content:
     weight: 2
     region: content
 hidden:
+  field_attribution: true
+  field_background_color: true
+  field_theme: true
   search_api_excerpt: true

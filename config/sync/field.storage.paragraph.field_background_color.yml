@@ -21,14 +21,11 @@ settings:
       value: blue
       label: Blue
     -
+      value: tan
+      label: Tan
+    -
       value: sage
       label: Sage
-    -
-      value: purple
-      label: Purple
-    -
-      value: plum
-      label: Plum
     -
       value: white
       label: White
